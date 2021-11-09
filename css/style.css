@@ -1,0 +1,23 @@
+header>h1 {
+    color: burlywood;
+}
+
+.perfil {
+    display: none;
+}
+
+.register {
+    display: none;
+}
+
+.login {
+    display: none;
+}
+
+.instruções {
+    display: none;
+}
+
+.comandos {
+    display: none;
+}

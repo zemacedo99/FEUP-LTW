@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Mancala</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <h1>Mancala</h1>
+    </header>
+
+    <!-- <nav id="menu">
+    </nav> -->
+
+    <section class="register">
+        <form action="action_page.php">
+            <div class="container">
+                <h1>Criar conta</h1>
+                <p>Preencha este formulario para a criação de uma conta.</p>
+                <hr>
+
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Email" name="email" id="email" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="psw" id="psw" required>
+
+                <label for="psw-repeat"><b>Repita a Password</b></label>
+                <input type="password" placeholder="Password" name="psw-repeat" id="psw-repeat" required>
+                <hr>
+
+                <button type="submit" class="registerbtn">Criar conta</button>
+            </div>
+
+            <div class="container signin">
+                <p>Já tem uma conta? <a href="#">Login</a>.</p>
+            </div>
+        </form>
+    </section>
+
+    <section class="login">
+        <form action="action_page.php" method="post">
+            <div class="container">
+                <label for="uname"><b>Email</b></label>
+                <input type="text" placeholder="Email" name="email" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="psw" required>
+
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="perfil">
+        <p> Name : </p>
+        <h1> Name of the user who has logged in </h1>
+
+        <p> Email : </p>
+        <h2> Email of the user who has logged in </h2>
+
+
+        <button>Criar conta</button>
+        <button>Login</button>
+        <button>Logout</button>
+    </section>
+
+    <section class="configurações">
+        <ul>
+            <li><a href="index.html">Número de cavidades de cada lado do tabuleiro</a></li>
+            <li><a href="index.html">Número inicial de sementes por cavidade</a></li>
+            <li><a href="index.html">Jogar contra o computador ou outro jogador</a></li>
+            <li><a href="index.html">Nível da inteligência artificial</a></li>
+        </ul>
+
+
+        <button>Novo Jogo</button>
+        <button>Terminar turno</button>
+    </section>
+
+    <section class="instruções">
+        <b>Mancala Game Instructions</b>
+        <br><br>
+        <b>Rules</b>
+        <br>
+        <br> At the beginning of the game, each of the (12) playing slots contains 4 beads. There are no beads in the mancalas. The player will redistribute the beads by selecting one of his own play slots to empty. The content of the slots will be droped
+        one at a time to the next slots to the right, including the player's own mancala but skipping his opponent's, continuing around the board.
+        <br>The players take turns selecting a slot to empty. If a player drops the last bead of his turn into his own mancala, he will immediately get an extra turn. No one can skip a turn. The game ends when one of the players runs out of beads to move
+        (when all of his play slots are empty). At the end of game, the player who still has beads in his play slots will move all the beads remaining into his own mancala.
+        <br>
+        <p>
+            <b>Objective</b>
+            <br>The player who has the most beads in his mancala wins!<br>
+        </p>
+        <p>
+            <b>How to Play</b><br> 1. Click on one of your own play slots (one of the slots on the second row of the board);<br> 2. If you get a bonus move (the last bead you drop ends in your own Mancala), play again;<br> 3. The computer will make its
+            move(s); note that the computer might get bonus moves, so wait a couple of seconds before your next move<br> 4. The game ends when one of the two rows of playing slots is completely empty. note that if one of the players still has beads remaining
+            in his play slots at game's end, the computer will automatically move these to the respective mancala.
+        </p>
+    </section>
+
+    <section class="comandos">
+        <ul>
+            <li><a href="index.html">Visualizar as instruções</a></li>
+            <li><a href="index.html">Iniciar o jogo com a configuração corrente</a></li>
+            <li><a href="index.html">Desistir do jogo</a></li>
+            <li><a href="index.html">Visualizar as classificações</a></li>
+        </ul>
+    </section>
+
+    <section class="board">
+
+        <div class="rows">
+            <div class="row player-one">
+                <div class="pit">
+                    <div class="seed"></div>
+                </div>
+            </div>
+
+            <div class="row player-two">
+                <div class="pit">
+                    <div class="seed"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="estado_jogo">
+
+        <p>
+            Jogador 1: n sementes
+        </p>
+
+        <p>
+            Jogador 2: n sementes
+        </p>
+
+    </section>
+
+    <!-- <footer>
+        <p> FEUP-LTW, 2021</p>
+    </footer> -->
+
+</body>
+
+</html>
