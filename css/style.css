@@ -1,5 +1,13 @@
+:root {
+    --board-main-color: burlywood;
+    --board-sec-color: #966e3386;
+    --board-shadow-color: #966F33;
+    --seed-main-color: #b06a6a;
+    --seed-sec-color: #a83e3e;
+}
+
 header>h1 {
-    color: burlywood;
+    color: var(--board-main-color);
 }
 
 .perfil {
@@ -18,6 +26,68 @@ header>h1 {
     display: none;
 }
 
+.configurações {
+    display: none;
+}
+
 .comandos {
     display: none;
+}
+
+.estado_jogo {
+    display: none;
+}
+
+.board {
+    margin: 30px auto;
+    display: flex;
+    flex-flow: row;
+    border: 1px solid var(--board-sec-color);
+    box-shadow: 0 0 5px var(--board-shadow-color);
+    width: 930px;
+    height: 235px;
+    max-width: 100%;
+    resize: both;
+    overflow-x: auto;
+    background: var(--board-main-color);
+    border-radius: 20px;
+}
+
+.rows {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    flex: 1;
+    display: flex;
+}
+
+.hole {
+    flex: 1;
+    border-radius: 100px;
+}
+
+.storage {
+    flex: 1;
+    border-radius: 50px;
+}
+
+.storage,
+.hole {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--board-sec-color);
+    box-shadow: inset 0 0 2px var(--board-shadow-color);
+}
+
+.seed {
+    background-color: var(--seed-main-color);
+    box-shadow: inset 0 0 2px var(--seed-sec-color);
+    height: 10px;
+    width: 15px;
+    border-radius: 50%;
 }
