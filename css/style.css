@@ -67,6 +67,7 @@ header>h1 {
 .hole {
     flex: 1;
     border-radius: 100px;
+    position: relative;
 }
 
 .storage {
@@ -85,6 +86,7 @@ header>h1 {
 }
 
 .seed {
+    position: absolute;
     background-color: var(--seed-main-color);
     box-shadow: inset 0 0 2px var(--seed-sec-color);
     height: 10px;
