@@ -13,5 +13,5 @@ class Game {
 }
 
 window.onload = function () {
-    game = new Game(10, 5);
+    game = new Game(7, 5);
 }
