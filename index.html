@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/openModal.js" defer></script>
-    <script src="js/game.js"></script>
-    <script src="js/board.js"></script>
-    <script src="js/row.js"></script>
-    <script src="js/hole.js"></script>
-    <script src="js/seed.js"></script>
+    <script src="js/game.js"defer></script>
+    <script src="js/board.js"defer></script>
+    <script src="js/row.js"defer></script>
+    <script src="js/hole.js"defer></script>
+    <script src="js/seed.js"defer></script>
 </head>
 
 <body>
@@ -118,11 +118,11 @@
             <label for="lvl">Level:</label>
             <input type="number" id="lvl" name="lvl" value = "1">
 
-            <label for="holes">Number of holes:</label>
-            <input type="number" id="holes" name="holes" value="6">
+            <label for="number_holes">Number of holes:</label>
+            <input type="number" id="number_holes" name="number_holes" value="6">
 
-            <label for="seeds">Number of seeds:</label>
-            <input type="number" id="seeds" name="seeds" value ="4">
+            <label for="number_seeds">Number of seeds:</label>
+            <input type="number" id="number_seeds" name="number_seeds" value ="4">
 
             <br>
             <label class="chooseplayer">Player 1
@@ -158,8 +158,8 @@
     </section>
 
     <section class="btn-container2">  
-        <button type="submit">New Game</button>
-        <button type="submit">Quit</button>
+        <button id = "btn-newgame" type="submit">New Game</button>
+        <button id = "btn-quit" type="submit">Quit</button>
     </section>
 
     <section class="estado_jogo">
