@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/game.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/row.js"></script>
+    <script src="js/hole.js"></script>
+    <script src="js/seed.js"></script>
 </head>
 
 <body>
@@ -117,53 +122,7 @@
 
         <div class="player-one storage"></div>
 
-        <div class="rows">
-
-            <div class="row">
-                <div class="hole">
-                    <div class="seed"></div>
-                    <div class="seed"></div>
-                    <div class="seed"></div>
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-            </div>
-        </div>
+        <div id="rows"></div>
 
         <div class="player-two storage"></div>
 
@@ -172,11 +131,11 @@
     <section class="estado_jogo">
 
         <p>
-            Jogador 1: n sementes
+            Jogador 1: <b>n</b> sementes
         </p>
 
         <p>
-            Jogador 2: n sementes
+            Jogador 2: <b>n</b> sementes
         </p>
 
     </section>
