@@ -103,7 +103,7 @@ footer {
     border-radius: 20px;
 }
 
-.rows {
+#rows {
     flex: 7;
     display: flex;
     flex-direction: column;
