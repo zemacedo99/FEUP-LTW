@@ -16,5 +16,5 @@ class Board {
         }
 
         //now i have to create storage, but mora of that later
-    }
+    }   
 }

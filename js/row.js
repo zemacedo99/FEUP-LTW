@@ -21,6 +21,5 @@ class Row {
             let hole = new Hole(this.row_num, i, this.num_seeds);
             this.holes_list[i] = hole;
         }
-
     }
 }
