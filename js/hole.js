@@ -10,7 +10,7 @@ class Hole {
         document.getElementById(this.id).onclick = function ()
         {
             // console.log(this)
-            sow(x);
+            reap(x);
         }
     }
 
@@ -43,19 +43,25 @@ class Hole {
         this.seeds_list = [];
     }
 
-
-    //addSeed() function to add a seed in hole
+    addSeed()
+    {
+        let seed = new Seed(this.row, this.hole);
+        this.seeds_list[this.num_seeds] = seed;
+        this.num_seeds++;
+    }
 
     //maybe here it is where it distributes seed, since it knows where it is and haw many it has
 }
 
 //remenber that the seeds are sons of the hole    
 
-function sow(hole)
+function reap(hole)
 {       
-    // console.log(hole)
+    let inicial_num_seeds = hole.num_seeds
+    console.log(hole)
     hole.emptyHole();
     hole.set_num_seeds(0);
     hole.empty_seeds_list();
-    // console.log(hole)
+    console.log(hole)
+    return inicial_num_seeds
 }
