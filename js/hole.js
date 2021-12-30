@@ -9,7 +9,7 @@ class Hole {
         let x = this;
         document.getElementById(this.id).onclick = function ()
         {
-            console.log(this)
+            // console.log(this)
             sow(x);
         }
     }
@@ -29,22 +29,9 @@ class Hole {
         }
     }
 
-    updateHole() {
-        //add child hole to parent hole
-        document.getElementById(this.id).remove();
-        
-        const row = document.getElementById("row" + (this.row).toString());
-        let hole = document.createElement("div");
-        hole.setAttribute("class", "hole");
-        hole.setAttribute("id", this.id);
-        row.appendChild(hole);
-
-        //now fill the hole with seeds
-        for (let i = 0; i < this.num_seeds; i++) {
-            let seed = new Seed(this.row, this.hole);
-            this.seeds_list[i] = seed;
-        }
-        
+    emptyHole() {
+        let hole = document.getElementById(this.id);
+        hole.innerHTML = '';
     }
 
     set_num_seeds(n) {
@@ -66,9 +53,9 @@ class Hole {
 
 function sow(hole)
 {       
-    console.log(hole)
+    // console.log(hole)
+    hole.emptyHole();
     hole.set_num_seeds(0);
     hole.empty_seeds_list();
-    hole.updateHole();
-    console.log(hole)
+    // console.log(hole)
 }
