@@ -6,11 +6,15 @@ class Hole {
         this.num_seeds = num_seeds;
         this.seeds_list = [];
         this.createHole();
-        let x = this;
+
+        let thisHole = this;
+        this.reaping = false;
+        this.harvested_seeds = 0;
         document.getElementById(this.id).onclick = function ()
         {
             // console.log(this)
-            reap(x);
+            reap(thisHole);
+            sow(thisHole);
         }
     }
 
@@ -57,11 +61,11 @@ class Hole {
 
 function reap(hole)
 {       
-    let inicial_num_seeds = hole.num_seeds
-    console.log(hole)
+    hole.reaping = true;
+    hole.harvested_seeds = hole.num_seeds
+    // console.log(hole)
     hole.emptyHole();
     hole.set_num_seeds(0);
     hole.empty_seeds_list();
-    console.log(hole)
-    return inicial_num_seeds
+    // console.log(hole)
 }
