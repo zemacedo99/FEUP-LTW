@@ -1,11 +1,12 @@
 class Hole {
     constructor(row, hole, num_seeds) {
-        this.id = "hole" + row.toString() + hole.toString();
         this.row = row;
         this.hole = hole;
+        this.id = "hole" + row.toString() + hole.toString();
         this.num_seeds = num_seeds;
         this.seeds_list = [];
         this.createHole();
+        document.getElementById(this.id).onclick = this.sow();
     }
 
     createHole() {
@@ -15,12 +16,20 @@ class Hole {
         hole.setAttribute("class", "hole");
         hole.setAttribute("id", this.id);
         row.appendChild(hole);
+        // document.getElementById(this.id).addEventListener("click", this.sow());
+        // hole.onclick = this.sow();
+        // document.getElementById(this.id).onclick = this.sow();
 
         //now fill the hole with seeds
         for (let i = 0; i < this.num_seeds; i++) {
             let seed = new Seed(this.row, this.hole);
             this.seeds_list[i] = seed;
         }
+    }
+
+    sow()
+    {       
+        console.log(document.getElementById(this.id))
     }
 
     //addSeed() function to add a seed in hole
