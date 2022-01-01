@@ -17,7 +17,7 @@ class Board {
 
         //create storage
         for (let i = 0; i < 2; i++) {
-            let storage = new Storage(i+1);
+            let storage = new Storage(i);
             this.storages_list[i] = storage;
         }
     }   
@@ -49,7 +49,6 @@ class Board {
             let sow_hole_index = holeIndex + i;
             if(sow_hole_index < this.num_holes)
             {
-                console.log(sow_hole_index)
                 let next_hole = row.holes_list[sow_hole_index];
                 next_hole.addSeed();
             }
