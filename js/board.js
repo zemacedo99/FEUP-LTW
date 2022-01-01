@@ -43,12 +43,15 @@ class Board {
     sow(rowIndex,holeIndex,hole)
     {   
         let row = this.rows_list[rowIndex];
-        let sow_hole_index;
+        let sow_hole_index = holeIndex;
 
-        for(let i=1; i <= hole.harvested_seeds; i++)
+
+
+        while(hole.harvested_seeds != 0)
         {
-            sow_hole_index = holeIndex + i;
-            if(sow_hole_index < this.num_holes)
+            sow_hole_index = sow_hole_index + 1;
+
+            if(sow_hole_index <= this.num_holes)
             {
                 let next_hole = row.holes_list[sow_hole_index];
                 next_hole.addSeed();
