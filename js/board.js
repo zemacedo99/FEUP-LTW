@@ -29,7 +29,7 @@ class Board {
         for (let r = 0; r < 2; r++) {
             let row = this.rows_list[r];
 
-            for (let h = 0; h < this.num_holes; h++) {
+            for (let h = 1; h <= this.num_holes; h++) {
 
                 let hole = row.holes_list[h];
                 if (hole.reaping)
@@ -41,26 +41,48 @@ class Board {
     }
 
     sow(rowIndex,holeIndex,hole)
-    {    
+    {   
         let row = this.rows_list[rowIndex];
+        let sow_hole_index;
 
         for(let i=1; i <= hole.harvested_seeds; i++)
         {
-            let sow_hole_index = holeIndex + i;
+            sow_hole_index = holeIndex + i;
             if(sow_hole_index < this.num_holes)
             {
                 let next_hole = row.holes_list[sow_hole_index];
                 next_hole.addSeed();
+                hole.harvested_seeds--;
             }
             else
             {
-                //add to storage and change row
+                let storage = this.storages_list[rowIndex];
+
+                //add seed to storage
+                storage.addSeed(); 
+                //change row
+                rowIndex = rowIndex ? 0 : 1 
+
+                hole.harvested_seeds--;
+                break;
             }
-            // console.log(document.getElementById("rows"));
-            // console.log(document.getElementById(hole.id));
-            // get next holes to call hole.addSeed
-            hole.harvested_seeds--;
         }
+
+        // console.log(hole.harvested_seeds)
+
+        // for(let i = this.num_holes - 1; i < this.num_holes - hole.harvested_seeds ; i--)
+        // {
+        //     sow_hole_index = holeIndex + i;
+            
+        //     let next_hole = row.holes_list[sow_hole_index];
+        //     next_hole.addSeed();
+           
+        //     hole.harvested_seeds--;
+        // }
+ 
+
         hole.reaping = false;
     }
+
+    
 }

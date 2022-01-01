@@ -17,7 +17,7 @@ class Row {
         rows.appendChild(row);
 
         //now add holes to the row
-        for (let i = 0; i < this.num_holes; i++) {
+        for (let i = 1; i <= this.num_holes; i++) {
             let hole = new Hole(this.row_num, i, this.num_seeds);
             this.holes_list[i] = hole;
         }
