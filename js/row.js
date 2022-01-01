@@ -24,14 +24,14 @@ class Row {
     }
 }
 
-function sow(hole)
-{    
-    while(hole.harvested_seeds!=0)
-    {
-        console.log(document.getElementById("rows"));
-        console.log(document.getElementById(hole.id));
-        // get next holes to call hole.addSeed
-        hole.harvested_seeds--;
-    }
-}
+// function sow(hole)
+// {    
+//     while(hole.harvested_seeds!=0)
+//     {
+//         console.log(document.getElementById("rows"));
+//         console.log(document.getElementById(hole.id));
+//         // get next holes to call hole.addSeed
+//         hole.harvested_seeds--;
+//     }
+// }
 

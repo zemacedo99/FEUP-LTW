@@ -26,7 +26,7 @@ class Game {
     check_game_over()
     {
         let total_seeds = this.num_holes * this.num_seeds;
-        
+
         for( let index in this.board.storages_list)
         {
             let storage = this.board.storages_list[index];
@@ -34,7 +34,7 @@ class Game {
 
             if(player_n_seeds > total_seeds/2)
             {
-                finish_game(this.storage.id);
+                finish_game(storage.id);
             }
         }
     }
@@ -53,4 +53,9 @@ window.onload = function () {
 
 btnNewGame.onclick = function() {
 	window.location.reload();
+}
+
+function move()
+{    
+    game.board.move();
 }

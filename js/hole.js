@@ -14,7 +14,8 @@ class Hole {
         {
             // console.log(this)
             reap(thisHole);
-            sow(thisHole);
+            // sow(thisHole);
+            move();
         }
     }
 
