@@ -48,11 +48,13 @@ class Board {
         
         if(rowIndex == 1)
         {
+            console.log(rowIndex)
             this.sow_to_the_right(row,rowIndex,sow_hole_index,hole);
+            console.log(rowIndex)
         }
         else
         {
-            console.log("wip")
+            this.sow_to_the_left(row,rowIndex,sow_hole_index,hole);
         }
         
 
@@ -74,8 +76,6 @@ class Board {
     {
         while(hole.harvested_seeds != 0)
         {
-
-
             sow_hole_index++;
 
             if(sow_hole_index <= this.num_holes)
@@ -87,6 +87,31 @@ class Board {
             {
                 let storage = this.storages_list[rowIndex];
 
+                //add seed to storage
+                storage.addSeed(); 
+                //change row
+                rowIndex = rowIndex ? 0 : 1 
+                break;
+            }
+            hole.harvested_seeds--;
+        }
+    }
+
+    sow_to_the_left(row,rowIndex,sow_hole_index,hole)
+    {
+        while(hole.harvested_seeds != 0)
+        {
+            sow_hole_index--;
+            console.log(sow_hole_index)
+            if(sow_hole_index > 0)
+            {
+                let next_hole = row.holes_list[sow_hole_index];
+                next_hole.addSeed();
+            }
+            else
+            {
+                let storage = this.storages_list[rowIndex];
+                
                 //add seed to storage
                 storage.addSeed(); 
                 //change row
