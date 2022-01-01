@@ -15,6 +15,10 @@ class Board {
             this.rows_list[i] = row;
         }
 
-        //now i have to create storage, but mora of that later
+        //create storage
+        for (let i = 0; i < 2; i++) {
+            let storage = new Storage(i+1);
+            this.storages_list[i] = storage;
+        }
     }   
 }
