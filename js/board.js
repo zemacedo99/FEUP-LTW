@@ -50,12 +50,12 @@ class Board {
             if(rowIndex == 1)
             {
                 // console.log(rowIndex)
-                rowIndex = this.sow_to_the_right(row,rowIndex,sow_hole_index,hole);
+                [rowIndex,sow_hole_index] = this.sow_to_the_right(row,rowIndex,sow_hole_index,hole);
                 // console.log(rowIndex)
             }
             else
             {
-                rowIndex = this.sow_to_the_left(row,rowIndex,sow_hole_index,hole);
+                [rowIndex,sow_hole_index] = this.sow_to_the_left(row,rowIndex,sow_hole_index,hole);
             }
         }
 
@@ -84,10 +84,10 @@ class Board {
                 hole.harvested_seeds--;
                 //change row
                 rowIndex = rowIndex ? 0 : 1 
-                return rowIndex;
+                return [rowIndex,sow_hole_index];
             }
         }
-        return rowIndex;
+        return [rowIndex,sow_hole_index];
     }
 
     sow_to_the_left(row,rowIndex,sow_hole_index,hole)
@@ -110,10 +110,10 @@ class Board {
                 hole.harvested_seeds--;
                 //change row
                 rowIndex = rowIndex ? 0 : 1 
-                return rowIndex;
+                return [rowIndex,sow_hole_index];
             }   
         }
-        return rowIndex;
+        return [rowIndex,sow_hole_index];
     }
 
     
