@@ -42,33 +42,24 @@ class Board {
 
     sow(rowIndex,holeIndex,hole)
     {   
-        let row = this.rows_list[rowIndex];
         let sow_hole_index = holeIndex;
-
         
-        if(rowIndex == 1)
+        while(hole.harvested_seeds != 0)
         {
-            console.log(rowIndex)
-            this.sow_to_the_right(row,rowIndex,sow_hole_index,hole);
-            console.log(rowIndex)
+            let row = this.rows_list[rowIndex];
+            if(rowIndex == 1)
+            {
+                // console.log(rowIndex)
+                rowIndex = this.sow_to_the_right(row,rowIndex,sow_hole_index,hole);
+                // console.log(rowIndex)
+            }
+            else
+            {
+                rowIndex = this.sow_to_the_left(row,rowIndex,sow_hole_index,hole);
+            }
         }
-        else
-        {
-            this.sow_to_the_left(row,rowIndex,sow_hole_index,hole);
-        }
-        
 
-        // for(let i = this.num_holes - 1; i < this.num_holes - hole.harvested_seeds ; i--)
-        // {
-        //     sow_hole_index = holeIndex + i;
-            
-        //     let next_hole = row.holes_list[sow_hole_index];
-        //     next_hole.addSeed();
-           
-        //     hole.harvested_seeds--;
-        // }
- 
-
+        // console.log( hole.harvested_seeds)
         hole.reaping = false;
     }
 
@@ -82,6 +73,7 @@ class Board {
             {
                 let next_hole = row.holes_list[sow_hole_index];
                 next_hole.addSeed();
+                hole.harvested_seeds--;
             }
             else
             {
@@ -89,12 +81,13 @@ class Board {
 
                 //add seed to storage
                 storage.addSeed(); 
+                hole.harvested_seeds--;
                 //change row
                 rowIndex = rowIndex ? 0 : 1 
-                break;
+                return rowIndex;
             }
-            hole.harvested_seeds--;
         }
+        return rowIndex;
     }
 
     sow_to_the_left(row,rowIndex,sow_hole_index,hole)
@@ -102,11 +95,11 @@ class Board {
         while(hole.harvested_seeds != 0)
         {
             sow_hole_index--;
-            console.log(sow_hole_index)
             if(sow_hole_index > 0)
             {
                 let next_hole = row.holes_list[sow_hole_index];
                 next_hole.addSeed();
+                hole.harvested_seeds--;
             }
             else
             {
@@ -114,12 +107,13 @@ class Board {
                 
                 //add seed to storage
                 storage.addSeed(); 
+                hole.harvested_seeds--;
                 //change row
                 rowIndex = rowIndex ? 0 : 1 
-                break;
-            }
-            hole.harvested_seeds--;
+                return rowIndex;
+            }   
         }
+        return rowIndex;
     }
 
     
