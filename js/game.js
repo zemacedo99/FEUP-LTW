@@ -29,7 +29,19 @@ window.onload = function () {
 
 
 btnNewGame.onclick = function() {
-	window.location.reload();
+	newGame();
+}
+
+function newGame()
+{
+    // window.location.reload();
+    let rows = document.getElementById("rows");
+    let storage0 = document.getElementById("hole00");
+    let storage1 = document.getElementById("hole10");
+    rows.innerHTML = '';
+    storage0.innerHTML = '';
+    storage1.innerHTML = '';
+    game.startGame();
 }
 
 function move()
