@@ -1,8 +1,9 @@
 class Board {
-    constructor(id, num_holes, num_seeds) {
+    constructor(id, num_holes, num_seeds,first_player) {
         this.id = id;
         this.num_holes = num_holes;
         this.num_seeds = num_seeds;
+        this.current_player = first_player;
         this.rows_list = [];
         this.storages_list = [];
         this.createBoard();
@@ -22,10 +23,28 @@ class Board {
         }
     }   
 
+    checkPlayer(hole)
+    {
+        if(this.current_player == hole.row)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    changePlayer(current_player)
+    {
+        this.current_player = current_player ? 0 : 1 
+    }
+
+    changeRow(rowIndex)
+    {
+        rowIndex = rowIndex ? 0 : 1 
+        return rowIndex;
+    }
+
     move()
     {
-
-        // console.log("here")
         for (let r = 0; r < 2; r++) {
             let row = this.rows_list[r];
 
@@ -35,6 +54,7 @@ class Board {
                 if (hole.reaping)
                 {
                     this.sow(r,h,hole);
+                    this.changePlayer(this.current_player);
                 }
             }
         }
@@ -83,7 +103,7 @@ class Board {
                 this.add_to_stotage(storage);
                 hole.harvested_seeds--;
                 //change row
-                rowIndex = rowIndex ? 0 : 1 
+                rowIndex = this.changeRow(rowIndex);
                 return [rowIndex,sow_hole_index];
             }
         }
@@ -109,7 +129,7 @@ class Board {
                 this.add_to_stotage(storage);
                 hole.harvested_seeds--;
                 //change row
-                rowIndex = rowIndex ? 0 : 1 
+                rowIndex = this.changeRow(rowIndex);
                 return [rowIndex,sow_hole_index];
             }   
         }
