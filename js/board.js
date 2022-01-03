@@ -80,7 +80,7 @@ class Board {
                 let storage = this.storages_list[rowIndex];
 
                 //add seed to storage
-                storage.addSeed(); 
+                this.add_to_stotage(storage);
                 hole.harvested_seeds--;
                 //change row
                 rowIndex = rowIndex ? 0 : 1 
@@ -106,7 +106,7 @@ class Board {
                 let storage = this.storages_list[rowIndex];
                 
                 //add seed to storage
-                storage.addSeed(); 
+                this.add_to_stotage(storage);
                 hole.harvested_seeds--;
                 //change row
                 rowIndex = rowIndex ? 0 : 1 
@@ -116,5 +116,27 @@ class Board {
         return [rowIndex,sow_hole_index];
     }
 
+    add_to_stotage(storage)
+    {
+        storage.addSeed(); 
+        this.check_game_over(storage);
+    }
+
+    check_game_over(storage)
+    {
+        let total_seeds = this.num_holes * this.num_seeds;
+        let player_n_seeds = storage.seeds_list.length;
+
+
+        if(player_n_seeds > total_seeds/2)
+        {
+            this.finish_game(storage.id);
+        }
+    }
+
+    finish_game(player_id)
+    {
+        alert(player_id + " won");
+    }
     
 }

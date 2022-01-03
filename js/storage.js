@@ -3,12 +3,14 @@ class Storage {
         this.id = id;
         this.num_seeds = 0;
         this.seeds_list = [];
-        this.getStorage();
+        this.showScore();
     }
 
-    getStorage() {
-        this.element = document.getElementById("hole" + this.id.toString());
-        // console.log(this.element);
+    showScore()
+    {
+        let score = document.getElementById("score" + this.id.toString());
+        score.value = this.num_seeds;
+        score.innerHTML = score.value;
     }
 
     addSeed()
@@ -16,5 +18,7 @@ class Storage {
         let seed = new Seed(this.id, 0);
         this.seeds_list[this.num_seeds] = seed;
         this.num_seeds++;
+
+        this.showScore();
     }
 }

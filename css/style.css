@@ -75,7 +75,13 @@ float:right;
 }
 
 .estado_jogo {
-    display: none;
+    display: block;
+    text-align: center;
+}
+
+param {
+  display: inline-block;
+  color: var(--board-shadow-color);
 }
 
 footer {
