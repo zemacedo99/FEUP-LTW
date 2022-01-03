@@ -17,10 +17,21 @@ class Row {
         rows.appendChild(row);
 
         //now add holes to the row
-        for (let i = 0; i < this.num_holes; i++) {
+        for (let i = 1; i <= this.num_holes; i++) {
             let hole = new Hole(this.row_num, i, this.num_seeds);
             this.holes_list[i] = hole;
         }
-
     }
 }
+
+// function sow(hole)
+// {    
+//     while(hole.harvested_seeds!=0)
+//     {
+//         console.log(document.getElementById("rows"));
+//         console.log(document.getElementById(hole.id));
+//         // get next holes to call hole.addSeed
+//         hole.harvested_seeds--;
+//     }
+// }
+
