@@ -12,15 +12,36 @@ var closeConfig = document.getElementById("closeConfig");
 var closeLeaderBoard = document.getElementById("closeLeaderBoard");
 
 btnRules.onclick = function() {
-  rulesModal.style.display = "flex";
+    if(rulesModal.style.display == "flex")
+    {
+        rulesModal.style.display = "none"
+    }
+    else
+    {
+        rulesModal.style.display = "flex"
+    }
 }
 
 btnConfig.onclick = function() {
-    configModal.style.display = "flex";
+    if(configModal.style.display == "flex")
+    {
+        configModal.style.display = "none"
+    }
+    else
+    {
+        configModal.style.display = "flex"
+    }
 }
 
 btnLeaderBord.onclick = function() {
-    leaderBordModal.style.display = "flex";
+    if(leaderBordModal.style.display == "flex")
+    {
+        leaderBordModal.style.display = "none"
+    }
+    else
+    {
+        leaderBordModal.style.display = "flex"
+    }
 }
 
 
