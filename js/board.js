@@ -6,6 +6,7 @@ class Board {
         this.current_player = first_player;
         this.rows_list = [];
         this.storages_list = [];
+        this.showPlayerTurn();
         this.createBoard();
     }
 
@@ -23,6 +24,17 @@ class Board {
         }
     }   
 
+    showPlayerTurn()
+    {
+        let currentPlayer = document.getElementById("currentPlayer");
+
+        currentPlayer.innerHTML = this.current_player;
+        if(this.current_player == 0)
+        {
+            currentPlayer.innerHTML = 2;
+        }
+    }
+
     checkPlayer(hole)
     {
         if(this.current_player == hole.row)
@@ -35,6 +47,8 @@ class Board {
     changePlayer(current_player)
     {
         this.current_player = current_player ? 0 : 1 
+
+        this.showPlayerTurn();
     }
 
     changeRow(rowIndex)
