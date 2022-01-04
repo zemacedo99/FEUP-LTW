@@ -35,6 +35,17 @@ class Board {
         }
     }
 
+    showPlayerWin(player)
+    {
+        let currentPlayer = document.getElementById("currentPlayer");
+
+        currentPlayer.innerHTML = player + " win";
+        if(player == 0)
+        {
+            currentPlayer.innerHTML = 2 + " win";
+        }
+    }
+
     checkPlayer(hole)
     {
         if(this.current_player == hole.row)
@@ -68,6 +79,7 @@ class Board {
                 if (hole.reaping)
                 {
                     this.sow(r,h,hole);
+                    this.check_game_over();
                 }
             }
         }
@@ -220,23 +232,57 @@ class Board {
     {
         storage.addSeed(); 
         hole.harvested_seeds--;
-        this.check_game_over(storage);
     }
 
-    check_game_over(storage)
+    check_game_over()
     {
-        let total_seeds = this.num_holes * this.num_seeds;
-        let player_n_seeds = storage.seeds_list.length;
+        for (let r = 0; r < 2; r++) {
+            let row = this.rows_list[r];
 
-        if(player_n_seeds > total_seeds/2)
-        {
-            this.finish_game(storage.id);
+            let count_empty = 0;
+            for (let h = 1; h <= this.num_holes; h++) {
+
+                let hole = row.holes_list[h];
+                if (hole.num_seeds == 0)
+                {
+                    count_empty++;
+                }
+            }
+
+            if(count_empty == this.num_holes)
+            {
+                this.finish_game(r);
+            }
         }
     }
 
-    finish_game(player_id)
+    finish_game(empty_rowIndex)
     {
-        alert(player_id + " won");
+        let other_rowIndex = this.changeRow(empty_rowIndex)
+        let other_row = this.rows_list[other_rowIndex];
+        let other_storage = this.storages_list[other_rowIndex]
+        let storage = this.storages_list[empty_rowIndex]
+
+        for (let h = 1; h <= this.num_holes; h++) {
+
+            let hole = other_row.holes_list[h];
+            for(let i=0; i < hole.num_seeds; i++)
+            {
+                other_storage.addSeed();
+            }
+            hole.emptyHole();
+        }
+
+        if(storage.num_seeds > other_storage.num_seeds)
+        {
+            this.showPlayerWin(storage.id)
+        }
+        else
+        {
+            this.showPlayerWin(other_storage.id)
+        }
+        
     }
+    
     
 }
