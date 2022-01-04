@@ -230,8 +230,13 @@ class Board {
 
     add_to_stotage(hole,storage)
     {
-        storage.addSeed(); 
-        hole.harvested_seeds--;
+        console.log(storage.id)
+        console.log(hole.row)
+        if(storage.id == hole.row)
+        {
+            storage.addSeed(); 
+            hole.harvested_seeds--;
+        }
     }
 
     check_game_over()
