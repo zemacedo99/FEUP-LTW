@@ -114,11 +114,11 @@ class Board {
 
         let playAgain;
 
-        console.log("current player: " + this.current_player)
-        console.log("rowIndex: " + rowIndex)
-        console.log("sow_hole_index: " + sow_hole_index)
+        
+        
+        let storageIndex = this.changeRow(rowIndex)
         //if last seed sow ends at the storage of the player
-        if(rowIndex == this.current_player && sow_hole_index == 0)
+        if(storageIndex == this.current_player && (sow_hole_index == 0 || sow_hole_index > this.num_holes))
         {
             playAgain = true;
         }
@@ -126,7 +126,12 @@ class Board {
         {
             playAgain = false; 
         }
-
+        
+        // console.log("current player: " + this.current_player)
+        // console.log("storageIndex: " + storageIndex)
+        // console.log("sow_hole_index: " + sow_hole_index)
+        // console.log("n_holes: " + this.num_holes)
+        // console.log("play again " + playAgain)
 
         return playAgain
     }
@@ -161,7 +166,7 @@ class Board {
     {
         let row = this.rows_list[rowIndex];
         sow_hole_index--;
-        
+
         if(sow_hole_index > 0)
         {
             let next_hole = row.holes_list[sow_hole_index];
