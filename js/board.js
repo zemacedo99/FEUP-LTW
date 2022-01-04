@@ -111,7 +111,7 @@ class Board {
     {
         [rowIndex,sow_hole_index] = this.sow_seed(rowIndex,sow_hole_index,hole);
         let is_storage = sow_hole_index == 0 || sow_hole_index > this.num_holes
-        let playAgain;
+        let playAgain = false;
 
         if(!is_storage)
         {   
@@ -130,9 +130,23 @@ class Board {
             }
             else
             {
-                //empty oponent hole
+                if(last_sown_hole.num_seeds == 1)
+                {
+                    last_sown_hole.emptyHole();
+                    let storage = this.storages_list[last_sown_hole.row]
+                    storage.addSeed();
+
+                    let opposite_rowIndex = this.changeRow(last_sown_hole.row)
+                    let opposite_row = this.rows_list[opposite_rowIndex];
+                    let opposite_hole = opposite_row.holes_list[last_sown_hole.hole];
+
+                    for(let i=0; i < opposite_hole.num_seeds; i++)
+                    {
+                        storage.addSeed();
+                    }
+                    opposite_hole.emptyHole();
+                }
             }
-            
         }
         else
         {
