@@ -143,35 +143,36 @@ class Board {
             if(last_sown_hole.row == this.current_player)
             {
                 if(last_sown_hole.num_seeds == 1)
-                {
-                    last_sown_hole.emptyHole();
-                    let storage = this.storages_list[last_sown_hole.row]
-                    storage.addSeed(); 
-                    playAgain = true;
-                }
-            }
-            else
-            {
-                if(last_sown_hole.num_seeds == 1)
-                {
-                    last_sown_hole.emptyHole();
-                    let storage = this.storages_list[last_sown_hole.row]
-                    storage.addSeed();
-
+                { 
                     let opposite_rowIndex = this.changeRow(last_sown_hole.row)
                     let opposite_row = this.rows_list[opposite_rowIndex];
-                    let opposite_hole = opposite_row.holes_list[last_sown_hole.hole];
+                    let opposite_hole = opposite_row.holes_list[last_sown_hole.hole];        
+                    let storage = this.storages_list[last_sown_hole.row]
+                    let not_empty = false;
 
                     for(let i=0; i < opposite_hole.num_seeds; i++)
                     {
                         storage.addSeed();
+                        not_empty = true;
                     }
                     opposite_hole.emptyHole();
+
+                    if(not_empty)
+                    {
+                        last_sown_hole.emptyHole();
+                        storage.addSeed();
+                    }
+
                 }
             }
         }
         else
         {
+
+            if(hole.harvested_seeds != 0)
+            {
+                this.sow_last_seed(rowIndex,sow_hole_index,hole);
+            }
             let storageIndex = this.changeRow(rowIndex)
             //if last seed sow ends at the storage of the player
             if(storageIndex == this.current_player)
