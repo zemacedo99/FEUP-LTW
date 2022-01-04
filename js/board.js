@@ -55,10 +55,20 @@ class Board {
         return false;
     }
 
-    changePlayer(current_player)
+    changePlayer()
     {
-        this.current_player = current_player ? 0 : 1 
+        let next_player = this.current_player; 
 
+        if(this.current_player == 0)
+        {
+            next_player = 1;
+        }
+        if(this.current_player == 1)
+        {
+            next_player = 0;
+        }
+        
+        this.current_player = next_player;
         this.showPlayerTurn();
     }
 
@@ -99,7 +109,7 @@ class Board {
         
         if(!playAgain)
         {
-            this.changePlayer(this.current_player);
+            this.changePlayer();
         }
         // console.log( hole.harvested_seeds)
         hole.reaping = false;
@@ -230,8 +240,6 @@ class Board {
 
     add_to_stotage(hole,storage)
     {
-        console.log(storage.id)
-        console.log(hole.row)
         if(storage.id == hole.row)
         {
             storage.addSeed(); 
