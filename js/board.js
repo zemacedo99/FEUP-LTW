@@ -68,7 +68,6 @@ class Board {
                 if (hole.reaping)
                 {
                     this.sow(r,h,hole);
-                    this.changePlayer(this.current_player);
                 }
             }
         }
@@ -78,81 +77,115 @@ class Board {
     {   
         let sow_hole_index = holeIndex;
         
-        while(hole.harvested_seeds != 0)
+        while(hole.harvested_seeds != 1)
         {
-            let row = this.rows_list[rowIndex];
-            if(rowIndex == 1)
-            {
-                // console.log(rowIndex)
-                [rowIndex,sow_hole_index] = this.sow_to_the_right(row,rowIndex,sow_hole_index,hole);
-                // console.log(rowIndex)
-            }
-            else
-            {
-                [rowIndex,sow_hole_index] = this.sow_to_the_left(row,rowIndex,sow_hole_index,hole);
-            }
+            [rowIndex,sow_hole_index] = this.sow_seed(rowIndex,sow_hole_index,hole);
         }
 
+        //sow the last seed logic
+        let playAgain = this.sow_last_seed(rowIndex,sow_hole_index,hole);
+        
+        if(!playAgain)
+        {
+            this.changePlayer(this.current_player);
+        }
         // console.log( hole.harvested_seeds)
         hole.reaping = false;
     }
 
-    sow_to_the_right(row,rowIndex,sow_hole_index,hole)
+    sow_seed(rowIndex,sow_hole_index,hole)
     {
-        while(hole.harvested_seeds != 0)
+        if(rowIndex == 1)
         {
-            sow_hole_index++;
-
-            if(sow_hole_index <= this.num_holes)
-            {
-                let next_hole = row.holes_list[sow_hole_index];
-                next_hole.addSeed();
-                hole.harvested_seeds--;
-            }
-            else
-            {
-                let storage = this.storages_list[rowIndex];
-
-                //add seed to storage
-                this.add_to_stotage(storage);
-                hole.harvested_seeds--;
-                //change row
-                rowIndex = this.changeRow(rowIndex);
-                return [rowIndex,sow_hole_index];
-            }
+            [rowIndex,sow_hole_index] = this.sow_to_the_right(rowIndex,sow_hole_index,hole);
         }
+        else
+        {
+            [rowIndex,sow_hole_index] = this.sow_to_the_left(rowIndex,sow_hole_index,hole);
+        }
+
         return [rowIndex,sow_hole_index];
     }
 
-    sow_to_the_left(row,rowIndex,sow_hole_index,hole)
+    sow_last_seed(rowIndex,sow_hole_index,hole)
     {
-        while(hole.harvested_seeds != 0)
+        
+        [rowIndex,sow_hole_index] = this.sow_seed(rowIndex,sow_hole_index,hole);
+
+        let playAgain;
+
+        console.log("current player: " + this.current_player)
+        console.log("rowIndex: " + rowIndex)
+        console.log("sow_hole_index: " + sow_hole_index)
+        //if last seed sow ends at the storage of the player
+        if(rowIndex == this.current_player && sow_hole_index == 0)
         {
-            sow_hole_index--;
-            if(sow_hole_index > 0)
-            {
-                let next_hole = row.holes_list[sow_hole_index];
-                next_hole.addSeed();
-                hole.harvested_seeds--;
-            }
-            else
-            {
-                let storage = this.storages_list[rowIndex];
-                
-                //add seed to storage
-                this.add_to_stotage(storage);
-                hole.harvested_seeds--;
-                //change row
-                rowIndex = this.changeRow(rowIndex);
-                return [rowIndex,sow_hole_index];
-            }   
+            playAgain = true;
         }
+        else
+        {
+            playAgain = false; 
+        }
+
+
+        return playAgain
+    }
+
+    sow_to_the_right(rowIndex,sow_hole_index,hole)
+    {
+        let row = this.rows_list[rowIndex];
+        sow_hole_index++;
+
+        if(sow_hole_index <= this.num_holes)
+        {
+            let next_hole = row.holes_list[sow_hole_index];
+            next_hole.addSeed();
+            hole.harvested_seeds--;
+        }
+        else
+        {
+            let storage = this.storages_list[rowIndex];
+
+            //add seed to storage
+            this.add_to_stotage(hole,storage);
+            //change row
+            rowIndex = this.changeRow(rowIndex);
+            return [rowIndex,sow_hole_index];
+        }
+        
+        
         return [rowIndex,sow_hole_index];
     }
 
-    add_to_stotage(storage)
+    sow_to_the_left(rowIndex,sow_hole_index,hole)
+    {
+        let row = this.rows_list[rowIndex];
+        sow_hole_index--;
+        
+        if(sow_hole_index > 0)
+        {
+            let next_hole = row.holes_list[sow_hole_index];
+            next_hole.addSeed();
+            hole.harvested_seeds--;
+        }
+        else
+        {
+            let storage = this.storages_list[rowIndex];
+            
+            //add seed to storage
+            this.add_to_stotage(hole,storage);
+            //change row
+            rowIndex = this.changeRow(rowIndex);
+            return [rowIndex,sow_hole_index];
+        }   
+        
+        return [rowIndex,sow_hole_index];
+    }
+
+    add_to_stotage(hole,storage)
     {
         storage.addSeed(); 
+        hole.harvested_seeds--;
         this.check_game_over(storage);
     }
 
@@ -160,7 +193,6 @@ class Board {
     {
         let total_seeds = this.num_holes * this.num_seeds;
         let player_n_seeds = storage.seeds_list.length;
-
 
         if(player_n_seeds > total_seeds/2)
         {
