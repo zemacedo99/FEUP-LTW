@@ -74,6 +74,17 @@ float:right;
     display: none;
 }
 
+.turn {
+  display:  block;
+  font-size: large;
+  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  text-align: center;
+  color: var(--seed-sec-color);
+}
+
 .estado_jogo {
     display: block;
     text-align: center;

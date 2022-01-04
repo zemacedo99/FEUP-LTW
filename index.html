@@ -93,7 +93,7 @@
             <br><br>
             <b>Rules</b>
             <br>
-            <br> At the beginning of the game, each of the (12) playing slots contains 4 beads. There are no beads in the mancalas. The player will redistribute the beads by selecting one of his own play slots to empty. The content of the slots will be droped
+            <br> At the beginning of the game, each of the playing slots contains beads. There are no beads in the mancalas. The player will redistribute the beads by selecting one of his own play slots to empty. The content of the slots will be droped
             one at a time to the next slots to the right, including the player's own mancala but skipping his opponent's, continuing around the board.
             <br>The players take turns selecting a slot to empty. If a player drops the last bead of his turn into his own mancala, he will immediately get an extra turn. No one can skip a turn. The game ends when one of the players runs out of beads to move
             (when all of his play slots are empty). At the end of game, the player who still has beads in his play slots will move all the beads remaining into his own mancala.
@@ -127,11 +127,11 @@
 
             <br>
             <label class="chooseplayer">Player 1
-                <input type="radio" checked="checked" name="radio">
+                <input type="radio" checked="checked" name="chooseplayerRadio" value="1">
                 <span class="checkmark"></span>
             </label>
             <label class="chooseplayer">Player 2
-                <input type="radio" name="radio">
+                <input type="radio" name="chooseplayerRadio" value="0">
                 <span class="checkmark"></span>
             </label>
 
@@ -147,6 +147,14 @@
         </div>
       
     </div>
+
+    <section class="turn">
+        <h1>
+           Player <param  id = "currentPlayer"> turn
+        </h1>
+    </section>
+    
+   
 
     <section class="board">
 

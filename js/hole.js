@@ -12,10 +12,12 @@ class Hole {
         this.harvested_seeds = 0;
         document.getElementById(this.id).onclick = function ()
         {
-            // console.log(this)
-            reap(thisHole);
-            // sow(thisHole);
-            move();
+            let right_player = checkPlayer(thisHole);
+            if(right_player)
+            {
+                reap(thisHole);
+                move();
+            }
         }
     }
 
