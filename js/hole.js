@@ -37,17 +37,10 @@ class Hole {
     }
 
     emptyHole() {
+        this.seeds_list = [];
+        this.num_seeds = 0;
         let hole = document.getElementById(this.id);
         hole.innerHTML = '';
-    }
-
-    set_num_seeds(n) {
-        this.num_seeds = n.toString();
-    }
-
-    empty_seeds_list()
-    {
-        this.seeds_list = [];
     }
 
     addSeed()
@@ -64,11 +57,10 @@ class Hole {
 
 function reap(hole)
 {       
-    hole.reaping = true;
-    hole.harvested_seeds = hole.num_seeds
-    // console.log(hole)
-    hole.emptyHole();
-    hole.set_num_seeds(0);
-    hole.empty_seeds_list();
-    // console.log(hole)
+    if(hole.num_seeds > 0)
+    {
+        hole.harvested_seeds = hole.num_seeds
+        hole.reaping = true;
+        hole.emptyHole();
+    }
 }
