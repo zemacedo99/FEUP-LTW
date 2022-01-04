@@ -109,29 +109,44 @@ class Board {
 
     sow_last_seed(rowIndex,sow_hole_index,hole)
     {
-        
         [rowIndex,sow_hole_index] = this.sow_seed(rowIndex,sow_hole_index,hole);
-
+        let is_storage = sow_hole_index == 0 || sow_hole_index > this.num_holes
         let playAgain;
 
-        
-        
-        let storageIndex = this.changeRow(rowIndex)
-        //if last seed sow ends at the storage of the player
-        if(storageIndex == this.current_player && (sow_hole_index == 0 || sow_hole_index > this.num_holes))
-        {
-            playAgain = true;
+        if(!is_storage)
+        {   
+            let row = this.rows_list[rowIndex];
+            let last_sown_hole = row.holes_list[sow_hole_index];
+            
+            if(last_sown_hole.row == this.current_player)
+            {
+                if(last_sown_hole.num_seeds == 1)
+                {
+                    last_sown_hole.emptyHole();
+                    let storage = this.storages_list[last_sown_hole.row]
+                    storage.addSeed(); 
+                    playAgain = true;
+                }
+            }
+            else
+            {
+                //empty oponent hole
+            }
+            
         }
         else
         {
-            playAgain = false; 
+            let storageIndex = this.changeRow(rowIndex)
+            //if last seed sow ends at the storage of the player
+            if(storageIndex == this.current_player)
+            {
+                playAgain = true;
+            }
+            else
+            {
+                playAgain = false; 
+            }
         }
-        
-        // console.log("current player: " + this.current_player)
-        // console.log("storageIndex: " + storageIndex)
-        // console.log("sow_hole_index: " + sow_hole_index)
-        // console.log("n_holes: " + this.num_holes)
-        // console.log("play again " + playAgain)
 
         return playAgain
     }
