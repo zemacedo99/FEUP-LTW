@@ -11,64 +11,55 @@ var closerules = document.getElementById("closeRules");
 var closeConfig = document.getElementById("closeConfig");
 var closeLeaderBoard = document.getElementById("closeLeaderBoard");
 
-btnRules.onclick = function() {
-    if(rulesModal.style.display == "flex")
-    {
+btnRules.onclick = function () {
+    if (rulesModal.style.display == "flex") {
         rulesModal.style.display = "none"
     }
-    else
-    {
+    else {
         rulesModal.style.display = "flex"
     }
 }
 
-btnConfig.onclick = function() {
-    if(configModal.style.display == "flex")
-    {
+btnConfig.onclick = function () {
+    if (configModal.style.display == "flex") {
         configModal.style.display = "none"
     }
-    else
-    {
+    else {
         configModal.style.display = "flex"
     }
 }
 
-btnLeaderBord.onclick = function() {
-    if(leaderBordModal.style.display == "flex")
-    {
+btnLeaderBord.onclick = function () {
+    if (leaderBordModal.style.display == "flex") {
         leaderBordModal.style.display = "none"
     }
-    else
-    {
+    else {
         leaderBordModal.style.display = "flex"
     }
 }
 
 
-closerules.onclick = function() {
+closerules.onclick = function () {
     rulesModal.style.display = "none";
 }
 
-closeConfig.onclick = function() {
+closeConfig.onclick = function () {
     configModal.style.display = "none";
 }
 
-closeLeaderBoard.onclick = function() {
+closeLeaderBoard.onclick = function () {
     leaderBordModal.style.display = "none";
 }
 
 // When the user clicks anywhere outside, close it
-window.onclick = function(event) {
-    if (event.target == rulesModal)
-    {
+window.onclick = function (event) {
+    if (event.target == rulesModal) {
         rulesModal.style.display = "none";
     }
-    if (event.target == configModal) 
-    {
+    if (event.target == configModal) {
         configModal.style.display = "none";
     }
-    if (event.target == leaderBordModal) 
-    {
+    if (event.target == leaderBordModal) {
         leaderBordModal.style.display = "none";
     }
 }
