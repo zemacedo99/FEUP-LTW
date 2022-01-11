@@ -69,6 +69,28 @@ async function ranking() {
     let responseJSON = await response.json();
 
     //show what i got 
-    console.log(response);
-    console.log(responseJSON);
+    // console.log(response);
+    // console.log(responseJSON);
+    showLeaderBoard(responseJSON.ranking);
+}
+
+function showLeaderBoard(rankings)
+{
+    let tbodyRef = document.getElementById('leaderBoard').getElementsByTagName('tbody')[0];
+
+    let newRow = tbodyRef.insertRow();
+
+    // console.log(rankings)
+    for(i = 0; i < rankings.length; i++)
+    {        
+        let nick = newRow.insertCell(0);
+        let games = newRow.insertCell(1);
+        let victories = newRow.insertCell(2);
+        nick.innerHTML = rankings[i].nick;
+        games.innerHTML = rankings[i].games;
+        victories.innerHTML = rankings[i].victories;
+        newRow = tbodyRef.insertRow();
+    }
+
+
 }
