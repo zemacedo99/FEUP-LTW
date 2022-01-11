@@ -109,8 +109,8 @@ footer {
     margin: 150px auto;
     display: flex;
     flex-flow: row;
-    border: 1px solid var(--board-sec-color);
-    box-shadow: 0 0 5px var(--board-shadow-color);
+    border: 5px outset var(--board-sec-color);
+    box-shadow: var(--board-shadow-color) 1px 1px 25px -10px;
     width: 750px;
     height: 190px;
     max-width: 100%;
@@ -149,7 +149,7 @@ footer {
     justify-content: center;
     align-items: center;
     background-color: var(--board-sec-color);
-    box-shadow: inset 0 0 2px var(--board-shadow-color);
+    box-shadow: inset 0 0 2px var(--board-sec-color), inset 0 5px 15px var(--board-shadow-color);
 }
 
 .seed {
@@ -159,6 +159,7 @@ footer {
     height: 10px;
     width: 15px;
     border-radius: 50%;
+    border: 0.1px solid var(--seed-main-color);
 }
 
 .btn-container2{
