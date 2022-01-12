@@ -1,5 +1,6 @@
 let game;
-var btnNewGame = document.getElementById("btn-newgame");
+let btnNewGame = document.getElementById("btn-newgame");
+let btnRegister = document.getElementById("btn-register");
 
 class Game {
     constructor() {
@@ -26,6 +27,10 @@ window.onload = function () {
 
 btnNewGame.onclick = function () {
     newGame();
+}
+
+btnRegister.onclick = function () {
+    register();
 }
 
 function newGame() {

@@ -1,21 +1,43 @@
-async function ranking() {
-    let url = "http://twserver.alunos.dcc.fc.up.pt:8008/ranking";
+let server = "http://twserver.alunos.dcc.fc.up.pt:8008/";
+
+async function request(type,method,body) {
+    let url = "http://twserver.alunos.dcc.fc.up.pt:8008/" + type;
 
     let request = fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({}), //the body of the message is empty, newline
+        method: method,
+        body: JSON.stringify({body}), //the body of the message is empty, newline
     }
     );
 
-    //if it was ok
     let response = await request;
-
-    //the info that i wanted (in this case the leaderboard)
     let responseJSON = await response.json();
 
-    //show what i got 
-    // console.log(response);
-    // console.log(responseJSON);
+    return responseJSON;
+}
+
+
+async function register() {
+    let url = "http://twserver.alunos.dcc.fc.up.pt:8008/register";
+
+    let request = fetch(url, {
+        method: method,
+        body: JSON.stringify("nick: EWGR, password: another"), //the body of the message is empty, newline
+    }
+    );
+
+    let response = await request;
+    let responseJSON = await response.json();
+
+    console.log(response);
+    console.log(responseJSON);
+
+}
+
+
+async function ranking() {
+
+    let responseJSON = await request( 'ranking','POST','');
+
     showLeaderBoard(responseJSON.ranking);
 }
 
@@ -35,4 +57,12 @@ function showLeaderBoard(rankings)
         victories.innerHTML = rankings[i].victories;
         newRow = tbodyRef.insertRow();
     }
+}
+
+async function register() 
+{
+    let nickname = document.getElementById("Nickname").value;
+    let password = document.getElementById("psw").value;
+    console.log(nickname)
+    console.log(password)
 }
