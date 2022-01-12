@@ -5,34 +5,16 @@ async function request(type,method,body) {
 
     let request = fetch(url, {
         method: method,
-        body: JSON.stringify({body}), //the body of the message is empty, newline
+        body: JSON.stringify(body), //the body of the message is empty, newline
     }
     );
 
     let response = await request;
     let responseJSON = await response.json();
-
+    
+    console.log(response.statusText)
     return responseJSON;
 }
-
-
-async function register() {
-    let url = "http://twserver.alunos.dcc.fc.up.pt:8008/register";
-
-    let request = fetch(url, {
-        method: method,
-        body: JSON.stringify("nick: EWGR, password: another"), //the body of the message is empty, newline
-    }
-    );
-
-    let response = await request;
-    let responseJSON = await response.json();
-
-    console.log(response);
-    console.log(responseJSON);
-
-}
-
 
 async function ranking() {
 
@@ -62,7 +44,16 @@ function showLeaderBoard(rankings)
 async function register() 
 {
     let nickname = document.getElementById("Nickname").value;
-    let password = document.getElementById("psw").value;
+    let psw = document.getElementById("psw").value;
     console.log(nickname)
-    console.log(password)
+    console.log(psw)
+
+    let body = {
+        nick: nickname,
+        password: psw 
+    }
+    let responseJSON = await request('register','POST',body);
+
+    console.log(responseJSON);
+
 }
