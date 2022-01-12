@@ -17,6 +17,15 @@ button {
     display:inline-block;       
 }
 
+#btn-register {
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+  /* background: url(../docs/sign-in-alt-solid.svg);
+  background-size: 25px 25px; */
+}
+
 /* Add a hover effect for buttons */
 button:hover {
     opacity: 0.8;
@@ -44,9 +53,10 @@ float:left;
 }
 
 .navigation-bar .container{
-padding: 15px;
-margin: 5px;
 float:right;
+height: 22px;
+padding: 14px 20px;
+margin: 8px auto;
 }
     
 
