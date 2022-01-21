@@ -1,5 +1,6 @@
 let game;
 let btnNewGame = document.getElementById("btn-newgame");
+let btnNewGameAi = document.getElementById("btn-newgameai");
 let btnRegister = document.getElementById("btn-register");
 
 class Game {
@@ -13,6 +14,7 @@ class Game {
     }
 
     update_config() {
+        this.ai_level = document.getElementById("lvl").value;
         this.num_holes = document.getElementById("number_holes").value;
         this.num_seeds = document.getElementById("number_seeds").value;
         this.first_player = document.querySelector('input[name="chooseplayerRadio"]:checked').value;
@@ -30,7 +32,12 @@ btnNewGame.onclick = function () {
 }
 
 btnRegister.onclick = function () {
-    register();
+    let response = register();
+
+    if (response == "OK") {
+        console.log("it was ok")
+    }
+
 }
 
 function newGame() {
@@ -44,7 +51,9 @@ function newGame() {
     game.startGame();
 }
 
+
 function move() {
+    alert(aiPlay(game.ai_level, game.board.rows_list[0]) + "is the suggestion from ai for row 0");
     game.board.move();
 }
 
