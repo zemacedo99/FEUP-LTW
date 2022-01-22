@@ -53,7 +53,7 @@ function newGame() {
 
 
 function move() {
-    alert(aiPlay(game.ai_level, game.board.rows_list[0]) + "is the suggestion from ai for row 0");
+    alert(aiPlay(game.ai_level, game.board.rows_list[0]) + " is the suggestion from ai for row 0");
     game.board.move();
 }
 
