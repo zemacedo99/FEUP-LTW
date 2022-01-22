@@ -1,9 +1,10 @@
 class Board {
-    constructor(id, num_holes, num_seeds,first_player) {
+    constructor(id, num_holes, num_seeds,first_player,pc_mode) {
         this.id = id;
         this.num_holes = num_holes;
         this.num_seeds = num_seeds;
         this.current_player = first_player;
+        this.pc_mode = pc_mode;
         this.rows_list = [];
         this.storages_list = [];
         this.showPlayerTurn();
@@ -57,18 +58,26 @@ class Board {
 
     changePlayer()
     {
-        let next_player = this.current_player; 
+        if(this.pc_mode)
+        {
+            
+        }
+        else
+        {
+            let next_player = this.current_player; 
 
-        if(this.current_player == 0)
-        {
-            next_player = 1;
+            if(this.current_player == 0)
+            {
+                next_player = 1;
+            }
+            if(this.current_player == 1)
+            {
+                next_player = 0;
+            }
+            
+            this.current_player = next_player;
         }
-        if(this.current_player == 1)
-        {
-            next_player = 0;
-        }
-        
-        this.current_player = next_player;
+
         this.showPlayerTurn();
     }
 

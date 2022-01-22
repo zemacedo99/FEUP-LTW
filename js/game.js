@@ -10,13 +10,14 @@ class Game {
 
     startGame() {
         this.update_config();
-        this.board = new Board("board", this.num_holes, this.num_seeds, this.first_player);
+        this.board = new Board("board", this.num_holes, this.num_seeds, this.first_player, this.pc_mode);
     }
 
     update_config() {
         this.ai_level = document.getElementById("lvl").value;
         this.num_holes = document.getElementById("number_holes").value;
         this.num_seeds = document.getElementById("number_seeds").value;
+        this.pc_mode =  document.getElementById("pc_mode").checked ;
         this.first_player = document.querySelector('input[name="chooseplayerRadio"]:checked').value;
     }
 }
