@@ -10,11 +10,10 @@ class Hole {
         let thisHole = this;
         this.reaping = false;
         this.harvested_seeds = 0;
-        document.getElementById(this.id).onclick = function ()
-        {
+        document.getElementById(this.id).onclick = function () {
+            console.log("on the click");
             let right_player = checkPlayer(thisHole);
-            if(right_player)
-            {
+            if (right_player) {
                 reap(thisHole);
                 move();
             }
@@ -43,8 +42,7 @@ class Hole {
         hole.innerHTML = '';
     }
 
-    addSeed()
-    {
+    addSeed() {
         let seed = new Seed(this.row, this.hole);
         this.seeds_list[this.num_seeds] = seed;
         this.num_seeds++;
@@ -55,12 +53,13 @@ class Hole {
 
 //remenber that the seeds are sons of the hole    
 
-function reap(hole)
-{       
-    if(hole.num_seeds > 0)
-    {
+function reap(hole) {
+
+
+    if (hole.num_seeds > 0) {
         hole.harvested_seeds = hole.num_seeds
         hole.reaping = true;
         hole.emptyHole();
+        console.log("reaping in hole");
     }
 }
