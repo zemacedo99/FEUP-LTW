@@ -5,12 +5,13 @@ class Board {
         this.num_seeds = num_seeds;
         this.current_player = first_player;
         this.pc_mode = pc_mode;
-        this.pc_player = 1;
+        this.pc_player = 0;
         this.ai_level = ai_level;
         this.rows_list = [];
         this.storages_list = [];
         this.createBoard();
         this.showPlayerTurn();
+        this.aiplay();
     }
 
 
@@ -35,8 +36,6 @@ class Board {
         if (this.current_player == 0) {
             currentPlayer.innerHTML = 2;
         }
-
-        this.aiplay();
 
     }
 
@@ -78,6 +77,7 @@ class Board {
         return rowIndex;
     }
 
+
     aiplay() {
         console.log("pc player", this.pc_player, "current", this.current_player);
         if (this.pc_mode && this.pc_player == this.current_player) {
@@ -91,6 +91,7 @@ class Board {
             this.move();
         }
         else {
+            
             console.log("not pc turn");
         }
     }
@@ -103,7 +104,6 @@ class Board {
 
                 let hole = row.holes_list[h];
                 if (hole.reaping) {
-                    console.log("inside move, in inner if");
                     this.sow(r, h, hole);
                     this.check_game_over();
                 }

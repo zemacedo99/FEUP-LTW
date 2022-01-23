@@ -55,6 +55,7 @@ function newGame() {
 
 function move() {
     game.board.move();
+    game.board.aiplay();
 }
 
 function checkPlayer(hole) {
