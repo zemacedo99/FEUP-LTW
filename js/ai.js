@@ -16,7 +16,7 @@ function aiBasic(row) {
     let found_play = true;
 
     while (found_play) {
-        chosen_hole = Math.ceil(Math.random() * (row.holes_list.length));
+        chosen_hole = Math.floor(Math.random() * (row.holes_list.length - 1) + 1);
         console.log("chosen hole is " + chosen_hole);
         console.log("in ai basic num_Seeds = " + row.holes_list[chosen_hole].num_seeds);
         if (row.holes_list[chosen_hole].num_seeds != 0) {

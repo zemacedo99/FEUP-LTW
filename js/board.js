@@ -91,7 +91,7 @@ class Board {
             this.move();
         }
         else {
-            
+
             console.log("not pc turn");
         }
     }
@@ -123,6 +123,10 @@ class Board {
 
         if (!playAgain) {
             this.changePlayer();
+        }
+        else {
+            hole.reaping = false;
+            this.aiplay();
         }
         // console.log( hole.harvested_seeds)
         hole.reaping = false;
