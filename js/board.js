@@ -103,6 +103,7 @@ class Board {
 
                 let hole = row.holes_list[h];
                 if (hole.reaping) {
+                    // notify(hole.hole);
                     this.sow(r, h, hole);
                     this.check_game_over();
                 }

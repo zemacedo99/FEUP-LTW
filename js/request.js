@@ -96,13 +96,35 @@ async function update() {
     url.searchParams.append('nick', nickname);
     url.searchParams.append('game', gameToken);
 
-    console.log("inside update");
-
 
     const updateSource = new EventSource(url.href);
 
+
+
     updateSource.onmessage = response => {
-        console.log(response);
+        console.log(response.data);
+
+        let info = JSON.parse(response.data);
+
+        if (info.board.turn != undefined) {
+            console.log(info.board.turn);
+        }
+
+        if (info.pit != undefined) {
+            console.log(info.pit);
+            //  let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
+            // console.log("hole clicked by player ");
+            // console.log(hole_to_click);
+            // reap(hole_to_click);
+            // move();
+        }
+
+
+
+        // let hole_to_click = this.rows_list[0].holes_list[info.pit];
+
+
+
     }
 
 }
@@ -138,6 +160,8 @@ async function leave() {
 async function notify(to_move) {
     let nickname = document.getElementById("Nickname").value;
     let psw = document.getElementById("psw").value;
+    let gameToken = game.token;
+    console.log("hole number " + to_move);
 
     let options = {
         method: 'POST',
@@ -145,16 +169,15 @@ async function notify(to_move) {
             'Content-Type':
                 'application/json;'
         },
-        body: JSON.stringify({ nick: nickname, password: psw, game: "8e3046b4af11634aca6d04b278fadcde", move: to_move })
+        body: JSON.stringify({ nick: nickname, password: psw, game: gameToken, move: to_move })
     }
-    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/leave', options)
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/notify', options)
         .then((response) => {
             if (response.ok) {
-                console.log("leaved");
                 console.log(response.json());
                 return response;
             } else {
-                throw new Error('Not a');
+                throw new Error('notify error');
             }
         })
         .catch((error) => {
