@@ -26,6 +26,7 @@ class Game {
         this.num_seeds = document.getElementById("number_seeds").value;
         this.pc_mode = document.getElementById("pc_mode").checked;
         this.first_player = document.querySelector('input[name="chooseplayerRadio"]:checked').value;
+        console.log(this.first_player);
     }
 }
 
@@ -53,7 +54,6 @@ btnRegister.onclick = function () {
 
     console.log(response)
     if (response) {
-        console.log("here")
         let nickname = document.getElementById("Nickname").value;
 
         document.getElementById("without_login").style.display = "none";

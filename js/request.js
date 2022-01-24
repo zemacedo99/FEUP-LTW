@@ -103,27 +103,42 @@ async function update() {
 
     updateSource.onmessage = response => {
         console.log(response.data);
-
         let info = JSON.parse(response.data);
 
-        if (info.board.turn != undefined) {
-            console.log(info.board.turn);
+
+        // if ('turn' in info.board) {
+        //     console.log("inside first if");
+        //     if (info.board.turn == nickname && info.pit != undefined) {
+        //         let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
+        //         console.log("hole clicked by player " + hole_to_click);
+        //         console.log(hole_to_click);
+        //         reap(hole_to_click);
+        //         move();
+        //     }
+        //     console.log(info.board.turn);
+        // }
+
+        if ('turn' in info.board) {
+            if (info.board.turn != nickname) {
+                console.log("inside turn " + game.board.current_player);
+                game.board.current_player = 0;
+                console.log(game.board.current_player);
+            }
         }
 
-        if (info.pit != undefined) {
-            console.log(info.pit);
-            //  let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
-            // console.log("hole clicked by player ");
-            // console.log(hole_to_click);
-            // reap(hole_to_click);
-            // move();
+        console.log("pit:" + info);
+
+        if ('pit' in info) {
+            console.log("insidi pit in update");
+            console.log("current player is " + game.board.current_player);
+            if (game.board.current_player == 0) {
+                let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
+                console.log("hole clicked by player " + hole_to_click);
+                console.log(hole_to_click);
+                reap(hole_to_click);
+                move();
+            }
         }
-
-
-
-        // let hole_to_click = this.rows_list[0].holes_list[info.pit];
-
-
 
     }
 
