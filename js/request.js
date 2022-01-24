@@ -1,27 +1,26 @@
 let server = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 
-async function request(type, method, body) {
-    let url = "http://twserver.alunos.dcc.fc.up.pt:8008/" + type;
+async function ranking() {
+    let url = server + "ranking";
 
     let request = fetch(url, {
-        method: method,
-        body: JSON.stringify(body), //the body of the message is empty, newline
+        method: 'POST',
+        body: JSON.stringify({}), //the body of the message is empty, newline
     }
     );
 
+    //if it was ok
     let response = await request;
+
+    //the info that i wanted (in this case the leaderboard)
     let responseJSON = await response.json();
 
-    console.log(response.statusText)
-    return responseJSON;
-}
-
-async function ranking() {
-
-    let responseJSON = await request('ranking', 'POST', '');
-
+    //show what i got 
+    // console.log(response);
+    // console.log(responseJSON);
     showLeaderBoard(responseJSON.ranking);
 }
+
 
 function showLeaderBoard(rankings) {
     let tbodyRef = document.getElementById('leaderBoard').getElementsByTagName('tbody')[0];
@@ -39,30 +38,126 @@ function showLeaderBoard(rankings) {
     }
 }
 
+
 async function register() {
     let nickname = document.getElementById("Nickname").value;
     let psw = document.getElementById("psw").value;
-    console.log(nickname)
-    console.log(psw)
 
-    let body = {
-        nick: nickname,
-        password: psw
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type':
+                'application/json;'
+        },
+        body: JSON.stringify({ nick: nickname, password: psw })
     }
-    let responseJSON = await request('register', 'POST', body);
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/register', options)
+        .then((response) => {
+            if (response.ok) {
+                return response.ok;
+            } else {
+                throw new Error('Wrong password');
+            }
+        })
+        .catch((error) => {
+            alert(error);
+        });
+}
 
-    console.log(responseJSON);
+async function join() {
+    let nickname = document.getElementById("Nickname").value;
+    let psw = document.getElementById("psw").value;
+    let b_size = document.getElementById("number_holes").value;
+    let s_initial = document.getElementById("number_seeds").value;
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type':
+                'application/json;'
+        },
+        body: JSON.stringify({ group: 111, nick: nickname, password: psw, size: b_size, initial: s_initial })
+    }
+    let fetchRes = fetch('http://twserver.alunos.dcc.fc.up.pt:8008/join', options)
+
+    fetchRes.then(res =>
+        res.json()).then(d => {
+            console.log(d.game);
+            game.setToken(d.game);
+            return d.game;
+        })
+}
+
+async function update() {
+    let nickname = document.getElementById("Nickname").value;
+    let gameToken = game.token;
+    const url = new URL(server + "update");
+
+    url.searchParams.append('nick', nickname);
+    url.searchParams.append('game', gameToken);
+
+    console.log("inside update");
+
+
+    const updateSource = new EventSource(url.href);
+
+    updateSource.onmessage = response => {
+        console.log(response);
+    }
 
 }
 
+async function leave() {
+    let nickname = document.getElementById("Nickname").value;
+    let psw = document.getElementById("psw").value;
 
-//fetch(url, {
- //   method: 'POST',
-  //  headers: {
-  //      'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-   // },
-   // body: 'de=zp&para'
-//})
- //   .then(response => response.json())
- //   .then(process)
-  //  .catch(console.log);
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type':
+                'application/json;'
+        },
+        body: JSON.stringify({ nick: nickname, password: psw, game: "8e3046b4af11634aca6d04b278fadcde" })
+    }
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/leave', options)
+        .then((response) => {
+            if (response.ok) {
+                console.log("leaved");
+                console.log(response.json());
+                return response;
+            } else {
+                throw new Error('Not a');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+
+async function notify(to_move) {
+    let nickname = document.getElementById("Nickname").value;
+    let psw = document.getElementById("psw").value;
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type':
+                'application/json;'
+        },
+        body: JSON.stringify({ nick: nickname, password: psw, game: "8e3046b4af11634aca6d04b278fadcde", move: to_move })
+    }
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/leave', options)
+        .then((response) => {
+            if (response.ok) {
+                console.log("leaved");
+                console.log(response.json());
+                return response;
+            } else {
+                throw new Error('Not a');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}

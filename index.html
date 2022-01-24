@@ -19,6 +19,7 @@
 
 <body>
 
+
     <header>
         
         <div class="navigation-bar">
@@ -26,7 +27,7 @@
                 
             <img src="docs/logo.png" alt="Mancala Logo" height="55px">
             
-            <div class="container">
+            <div class="container" id = "without_login">
 
                 <label for="Nickname"><b>Nickname</b></label>
                 <input type="text" placeholder="Nickname" name="Nickname" id="Nickname" required>
@@ -35,6 +36,12 @@
                 <input type="password" placeholder="Password" name="psw" id="psw" required>
 
                 <button type="submit" id="btn-register"> <img src="docs/sign-in-alt-solid.svg" alt="Enter icon"  width="25px" height="22px"></button>
+            </div>
+
+            <div class="container" id = "with_login">
+
+                <p id = "nick_name"> </p>
+                <p id = "password" hiden> </p>
             </div>
 
         </div>
@@ -204,13 +211,20 @@
 
     </section>
     
-    <section class="btn-container2">  
+
+    <section class="btn-container1"> 
         <button id = "btn-newgame" type="submit">New Game</button>
+    </section>
+
+    <section class="btn-container2"  id = "with_login1"> 
+
+        <button id = "btn-multiplayer" type="submit">Multiplayer</button>
         <button id = "btn-quit" type="submit">Quit</button>
+
     </section>
 
 
-    <section class="btn-container3">  
+    <section class="btn-container3" >  
         <button id="btnRules" type="submit">Rules</button>
         <button id="btnLeaderBord" type="submit">LeaderBoard</button>
         <button id="btnConfig" type="submit">Configurations</button>

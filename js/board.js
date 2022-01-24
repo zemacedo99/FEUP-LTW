@@ -79,7 +79,6 @@ class Board {
 
 
     aiplay() {
-        console.log("pc player", this.pc_player, "current", this.current_player);
         if (this.pc_mode && this.pc_player == this.current_player) {
             let ai_choice;
 

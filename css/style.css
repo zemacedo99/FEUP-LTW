@@ -60,6 +60,19 @@ margin: 8px auto;
 }
     
 
+#without_login{
+display: block;
+}
+
+#with_login{
+display: none;
+}
+
+  
+#with_login1{
+display: none;
+}
+
 .perfil {
     display: none;
 }
@@ -116,7 +129,7 @@ footer {
   }
 
 .board {
-    margin: 150px auto;
+    margin: 150px auto 100px;
     display: flex;
     flex-flow: row;
     border: 5px outset var(--board-sec-color);
@@ -172,11 +185,19 @@ footer {
     border: 0.1px solid var(--seed-main-color);
 }
 
+.btn-container1{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 160px;
+}
+
 .btn-container2{
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     width: 320px;
 }
 

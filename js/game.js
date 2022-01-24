@@ -1,11 +1,18 @@
 let game;
 let btnNewGame = document.getElementById("btn-newgame");
+let btnMultiplayer = document.getElementById("btn-multiplayer");
 let btnNewGameAi = document.getElementById("btn-newgameai");
 let btnRegister = document.getElementById("btn-register");
+let btnLeave = document.getElementById("btn-quit");
 
 class Game {
     constructor() {
         this.startGame();
+    }
+
+    setToken(token) {
+        this.token = token;
+        update();
     }
 
     startGame() {
@@ -32,14 +39,33 @@ btnNewGame.onclick = function () {
     newGame();
 }
 
+btnMultiplayer.onclick = function () {
+    join();
+}
+
+btnLeave.onclick = function () {
+    leave();
+}
+
+
 btnRegister.onclick = function () {
     let response = register();
 
-    if (response == "OK") {
-        console.log("it was ok")
+    console.log(response)
+    if (response) {
+        console.log("here")
+        let nickname = document.getElementById("Nickname").value;
+
+        document.getElementById("without_login").style.display = "none";
+        document.getElementById("with_login").style.display = "block";
+        document.getElementById("with_login1").style.display = "block";
+        let name = document.getElementById('nick_name');
+        name.innerHTML = '<p>' + nickname + '</p>';
+
     }
 
 }
+
 
 function newGame() {
     // window.location.reload();
