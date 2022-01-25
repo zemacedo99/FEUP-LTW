@@ -1,4 +1,6 @@
 let server = "http://twserver.alunos.dcc.fc.up.pt:8008/";
+var first_play = true;
+var multi_player = false;
 
 async function ranking() {
     let url = server + "ranking";
@@ -105,39 +107,75 @@ async function update() {
         console.log(response.data);
         let info = JSON.parse(response.data);
 
-
-        // if ('turn' in info.board) {
-        //     console.log("inside first if");
-        //     if (info.board.turn == nickname && info.pit != undefined) {
-        //         let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
-        //         console.log("hole clicked by player " + hole_to_click);
-        //         console.log(hole_to_click);
-        //         reap(hole_to_click);
-        //         move();
-        //     }
-        //     console.log(info.board.turn);
-        // }
-
-        if ('turn' in info.board) {
-            if (info.board.turn != nickname) {
-                console.log("inside turn " + game.board.current_player);
-                game.board.current_player = 0;
-                console.log(game.board.current_player);
-            }
-        }
-
-        console.log("pit:" + info);
-
+        /*
         if ('pit' in info) {
-            console.log("insidi pit in update");
-            console.log("current player is " + game.board.current_player);
-            if (game.board.current_player == 0) {
+            if (game.board.current_player == 0 && info.board.turn == nickname) {
                 let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
                 console.log("hole clicked by player " + hole_to_click);
                 console.log(hole_to_click);
                 reap(hole_to_click);
                 move();
             }
+        }
+
+
+        if ('turn' in info.board && info.pit == undefined) {
+            if (info.board.turn == nickname) {
+                game.board.current_player = 1;
+                console.log(game.board.current_player);
+            }
+            else {
+                game.board.current_player = 0;
+                console.log(game.board.current_player);
+            }
+
+            game.board.showPlayerTurn();
+        }
+        */
+
+        if (first_play) {
+            if ('turn' in info.board) {
+                let turn = info.board.turn;
+                if (turn != nickname) {
+                    game.board.current_player = 0
+                }
+                else {
+                    game.board.current_player = 1;
+                }
+                game.board.showPlayerTurn();
+                first_play = false;
+                multi_player = true;
+                console.log("made first player change")
+            }
+        }
+
+        if ('board' in info) {
+            if ('pit' in info) {
+                if (game.board.current_player == 1) {
+                    let correct_pit = Math.abs(info.pit - game.num_holes);
+                    let hole_to_click = game.board.rows_list[0].holes_list[correct_pit];
+                    console.log("hole clicked by player " + hole_to_click);
+                    console.log(hole_to_click);
+                    reap(hole_to_click);
+                    move();
+                }
+            }
+            if ('turn' in info.board) {
+
+                let turn = info.board.turn;
+                if (turn != nickname) {
+                    game.board.current_player = 0
+                }
+                else {
+                    game.board.current_player = 1;
+                }
+                console.log("changed player");
+                game.board.showPlayerTurn();
+            }
+        }
+
+        if ('winner' in info) {
+            console.log("recieved winner");
         }
 
     }
@@ -154,7 +192,7 @@ async function leave() {
             'Content-Type':
                 'application/json;'
         },
-        body: JSON.stringify({ nick: nickname, password: psw, game: "8e3046b4af11634aca6d04b278fadcde" })
+        body: JSON.stringify({ nick: nickname, password: psw, game: game.token })
     }
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008/leave', options)
         .then((response) => {
@@ -184,7 +222,7 @@ async function notify(to_move) {
             'Content-Type':
                 'application/json;'
         },
-        body: JSON.stringify({ nick: nickname, password: psw, game: gameToken, move: to_move })
+        body: JSON.stringify({ nick: nickname, password: psw, game: gameToken, move: to_move - 1 })
     }
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008/notify', options)
         .then((response) => {

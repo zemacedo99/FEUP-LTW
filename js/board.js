@@ -103,7 +103,7 @@ class Board {
 
                 let hole = row.holes_list[h];
                 if (hole.reaping) {
-                    // notify(hole.hole);
+
                     this.sow(r, h, hole);
                     this.check_game_over();
                 }
@@ -122,7 +122,9 @@ class Board {
         let playAgain = this.sow_last_seed(rowIndex, sow_hole_index, hole);
 
         if (!playAgain) {
-            this.changePlayer();
+            if (!multi_player) {
+                this.changePlayer();
+            }
         }
         else {
             hole.reaping = false;

@@ -14,7 +14,7 @@ class Hole {
             console.log("on the click");
             let right_player = checkPlayer(thisHole);
             if (right_player) {
-                notify(thisHole.hole - 1);
+                notify(thisHole.hole);
                 reap(thisHole);
                 move();
             }
