@@ -30,11 +30,37 @@ class Board {
     }
 
     showPlayerTurn() {
-        let currentPlayer = document.getElementById("currentPlayer");
 
-        currentPlayer.innerHTML = this.current_player;
-        if (this.current_player == 0) {
-            currentPlayer.innerHTML = 2;
+        let currentPlayer = document.getElementById("currentPlayer");
+        if (this.pc_mode) {
+            currentPlayer.innerHTML = "Player " + this.current_player.toString() + " Turn";
+            if (this.current_player == 0) {
+                currentPlayer.innerHTML = "PC Turn";
+            }
+        }
+        else {
+
+            currentPlayer.innerHTML = "Player " + this.current_player.toString() + " Turn";
+            if (this.current_player == 0) {
+                currentPlayer.innerHTML = "Player 2 Turn";
+            }
+        }
+
+    }
+
+    showMultiPlayer() {
+
+        if (!multi_player) {
+            let currentPlayer = document.getElementById("currentPlayer");
+            currentPlayer.innerHTML = "Waiting for opponent";
+        }
+        else {
+            let currentPlayer = document.getElementById("currentPlayer");
+
+            currentPlayer.innerHTML = "Your Turn";
+            if (this.current_player == 0) {
+                currentPlayer.innerHTML = "Wait for your opponent move";
+            }
         }
 
     }
@@ -42,10 +68,21 @@ class Board {
     showPlayerWin(player) {
         let currentPlayer = document.getElementById("currentPlayer");
 
-        currentPlayer.innerHTML = player + " win";
+        currentPlayer.innerHTML = "Player " + player + " win";
         if (player == 0) {
             currentPlayer.innerHTML = 2 + " win";
         }
+    }
+
+    showMultiPlayerWin(player) {
+        let currentPlayer = document.getElementById("currentPlayer");
+        if (player == null) {
+            currentPlayer.innerHTML = "Its a draw";
+        }
+        else {
+            currentPlayer.innerHTML = "Player " + player + " win";
+        }
+
     }
 
     checkPlayer(hole) {
@@ -88,10 +125,6 @@ class Board {
             console.log(hole_to_click);
             reap(hole_to_click);
             this.move();
-        }
-        else {
-
-            console.log("not pc turn");
         }
     }
 

@@ -1,6 +1,7 @@
 let server = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 var first_play = true;
 var multi_player = false;
+var winner = null;
 
 async function ranking() {
     let url = server + "ranking";
@@ -151,7 +152,7 @@ async function update() {
 
         if ('board' in info) {
             if ('pit' in info) {
-                if (game.board.current_player == 1) {
+                if (game.board.current_player == 0) {
                     let correct_pit = Math.abs(info.pit - game.num_holes);
                     let hole_to_click = game.board.rows_list[0].holes_list[correct_pit];
                     console.log("hole clicked by player " + hole_to_click);
@@ -164,18 +165,26 @@ async function update() {
 
                 let turn = info.board.turn;
                 if (turn != nickname) {
-                    game.board.current_player = 0
+                    game.board.current_player = 0;
                 }
                 else {
                     game.board.current_player = 1;
                 }
                 console.log("changed player");
-                game.board.showPlayerTurn();
+                game.board.showMultiPlayer();
             }
         }
 
         if ('winner' in info) {
-            console.log("recieved winner");
+            if (info.winner == null) {
+                winner = null;
+            }
+            else {
+                winner = info.winner;
+            }
+
+            game.board.showMultiPlayerWin(winner);
+            console.log("recieved winner" + info.winner);
         }
 
     }

@@ -42,6 +42,7 @@ btnNewGame.onclick = function () {
 
 btnMultiplayer.onclick = function () {
     join();
+    game.board.showMultiPlayer();
 }
 
 btnLeave.onclick = function () {
