@@ -6,16 +6,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/ai.js" defer></script>
+    <script src="js/openModal.js" defer></script>
+    <script src="js/request.js" defer></script>
+    <script src="js/game.js"defer></script>
+    <script src="js/board.js"defer></script>
+    <script src="js/row.js"defer></script>
+    <script src="js/storage.js"defer></script>
+    <script src="js/hole.js"defer></script>
+    <script src="js/seed.js"defer></script>
 </head>
 
 <body>
 
-    <header>
-        <h1>Mancala</h1>
-    </header>
 
-    <!-- <nav id="menu">
-    </nav> -->
+    <header>
+        
+        <div class="navigation-bar">
+
+                
+            <img src="docs/logo.png" alt="Mancala Logo" height="55px">
+            
+            <div class="container" id = "without_login">
+
+                <label for="Nickname"><b>Nickname</b></label>
+                <input type="text" placeholder="Nickname" name="Nickname" id="Nickname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Password" name="psw" id="psw" required>
+
+                <button type="submit" id="btn-register"> <img src="docs/sign-in-alt-solid.svg" alt="Enter icon"  width="25px" height="22px"></button>
+            </div>
+
+            <div class="container" id = "with_login">
+
+                <p id = "nick_name"> </p>
+                <p id = "password" hiden> </p>
+            </div>
+
+        </div>
+
+    </header>
 
     <section class="register">
         <form action="action_page.php">
@@ -24,14 +55,11 @@
                 <p>Preencha este formulario para a criação de uma conta.</p>
                 <hr>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Email" name="email" id="email" required>
+                <label for="Nickname"><b>Nickname</b></label>
+                <input type="text" placeholder="Nickname" name="Nickname" id="Nickname" required>
 
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Password" name="psw" id="psw" required>
-
-                <label for="psw-repeat"><b>Repita a Password</b></label>
-                <input type="password" placeholder="Password" name="psw-repeat" id="psw-repeat" required>
                 <hr>
 
                 <button type="submit" class="registerbtn">Criar conta</button>
@@ -70,120 +98,141 @@
         <button>Logout</button>
     </section>
 
-    <section class="configurações">
-        <ul>
-            <li><a href="index.html">Número de cavidades de cada lado do tabuleiro</a></li>
-            <li><a href="index.html">Número inicial de sementes por cavidade</a></li>
-            <li><a href="index.html">Jogar contra o computador ou outro jogador</a></li>
-            <li><a href="index.html">Nível da inteligência artificial</a></li>
-        </ul>
+    <div id="myrulesModal" class="rulesModal">
 
+        <div class="rulesModal-content">
+          <span id="closeRules">&times;</span>
+            <b>Mancala Game Instructions</b>
+            <br><br>
+            <b>Rules</b>
+            <br>
+            <br> At the beginning of the game, each of the playing slots contains beads. There are no beads in the mancalas. The player will redistribute the beads by selecting one of his own play slots to empty. The content of the slots will be droped
+            one at a time to the next slots to the right, including the player's own mancala but skipping his opponent's, continuing around the board.
+            <br>The players take turns selecting a slot to empty. If a player drops the last bead of his turn into his own mancala, he will immediately get an extra turn. No one can skip a turn. The game ends when one of the players runs out of beads to move
+            (when all of his play slots are empty). At the end of game, the player who still has beads in his play slots will move all the beads remaining into his own mancala.
+            <br>
+            <p>
+                <b>Objective</b>
+                <br>The player who has the most beads in his mancala wins!<br>
+            </p>
+            <p>
+                <b>How to Play</b><br> 1. Click on one of your own play slots (one of the slots on the second row of the board);<br> 2. If you get a bonus move (the last bead you drop ends in your own Mancala), play again;<br> 3. The computer will make its
+                move(s); note that the computer might get bonus moves, so wait a couple of seconds before your next move<br> 4. The game ends when one of the two rows of playing slots is completely empty. note that if one of the players still has beads remaining
+                in his play slots at game's end, the computer will automatically move these to the respective mancala.
+            </p>
+        </div>
+      
+    </div>
 
-        <button>Novo Jogo</button>
-        <button>Terminar turno</button>
+    <div id="myConfigModal" class="configModal">
+
+        <div class="configModal-content">
+            <span id="closeConfig">&times;</span>
+            
+            <label for="lvl">Level:</label>
+            <input type="number" id="lvl" name="lvl" value = "1">
+
+            <label for="number_holes">Number of holes:</label>
+            <input type="number" id="number_holes" name="number_holes" value="6">
+
+            <label for="number_seeds">Number of seeds:</label>
+            <input type="number" id="number_seeds" name="number_seeds" value ="4">
+
+            <br>
+            <label class="chooseplayer">Player 1
+                <input type="radio" checked="checked" name="chooseplayerRadio" value="1">
+                <span class="checkmark"></span>
+            </label>
+            <label class="chooseplayer">Player 2
+                <input type="radio" name="chooseplayerRadio" value="0">
+                <span class="checkmark"></span>
+            </label>
+            <div>
+                <input type="checkbox" id="pc_mode" name="pc">
+                <label for="pc">PC</label>
+            </div>
+        </div>
+      
+    </div>
+
+    <div id="myLeaderBordModal" class="leaderBordModal">
+
+        <div class="leaderBordModal-content">
+          <span id="closeLeaderBoard">&times;</span>
+          <table id="leaderBoard">
+            <thead>
+              <tr>
+                <th>Mancala Leader Board</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>Games</td>
+                <td>Victories</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <!-- <td>My Footer</td> -->
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      
+    </div>
+
+    <section class="turn">
+        <h1>
+           <param  id = "currentPlayer">
+        </h1>
     </section>
-
-    <section class="instruções">
-        <b>Mancala Game Instructions</b>
-        <br><br>
-        <b>Rules</b>
-        <br>
-        <br> At the beginning of the game, each of the (12) playing slots contains 4 beads. There are no beads in the mancalas. The player will redistribute the beads by selecting one of his own play slots to empty. The content of the slots will be droped
-        one at a time to the next slots to the right, including the player's own mancala but skipping his opponent's, continuing around the board.
-        <br>The players take turns selecting a slot to empty. If a player drops the last bead of his turn into his own mancala, he will immediately get an extra turn. No one can skip a turn. The game ends when one of the players runs out of beads to move
-        (when all of his play slots are empty). At the end of game, the player who still has beads in his play slots will move all the beads remaining into his own mancala.
-        <br>
-        <p>
-            <b>Objective</b>
-            <br>The player who has the most beads in his mancala wins!<br>
-        </p>
-        <p>
-            <b>How to Play</b><br> 1. Click on one of your own play slots (one of the slots on the second row of the board);<br> 2. If you get a bonus move (the last bead you drop ends in your own Mancala), play again;<br> 3. The computer will make its
-            move(s); note that the computer might get bonus moves, so wait a couple of seconds before your next move<br> 4. The game ends when one of the two rows of playing slots is completely empty. note that if one of the players still has beads remaining
-            in his play slots at game's end, the computer will automatically move these to the respective mancala.
-        </p>
-    </section>
-
-    <section class="comandos">
-        <ul>
-            <li><a href="index.html">Visualizar as instruções</a></li>
-            <li><a href="index.html">Iniciar o jogo com a configuração corrente</a></li>
-            <li><a href="index.html">Desistir do jogo</a></li>
-            <li><a href="index.html">Visualizar as classificações</a></li>
-        </ul>
-    </section>
+    
+   
 
     <section class="board">
 
-        <div class="player-one storage"></div>
+        <div class="storage" id = "hole00"></div>
 
-        <div class="rows">
+        <div id="rows"></div>
 
-            <div class="row">
-                <div class="hole">
-                    <div class="seed"></div>
-                    <div class="seed"></div>
-                    <div class="seed"></div>
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-                <div class="hole">
-                    <div class="seed"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="player-two storage"></div>
+        <div class="storage" id = "hole10"></div>
 
     </section>
-
+    
     <section class="estado_jogo">
 
         <p>
-            Jogador 1: n sementes
+            Jogador 1: <param  id = "score1" value="0">
         </p>
-
         <p>
-            Jogador 2: n sementes
+            Jogador 2: <param  id = "score0" value="0">
         </p>
 
     </section>
+    
 
-    <!-- <footer>
-        <p> FEUP-LTW, 2021</p>
-    </footer> -->
+    <section class="btn-container1"> 
+        <button id = "btn-newgame" type="submit">New Game</button>
+    </section>
+
+    <section class="btn-container2"  id = "with_login1"> 
+
+        <button id = "btn-multiplayer" type="submit">Multiplayer</button>
+        <button id = "btn-quit" type="submit">Quit</button>
+
+    </section>
+
+
+    <section class="btn-container3" >  
+        <button id="btnRules" type="submit">Rules</button>
+        <button id="btnLeaderBord" type="submit">LeaderBoard</button>
+        <button id="btnConfig" type="submit">Configurations</button>
+    </section>
+
+    <footer>
+        <p> FEUP-LTW, 2021/22</p>
+    </footer>
 
 </body>
 
