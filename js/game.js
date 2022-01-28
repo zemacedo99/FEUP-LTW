@@ -26,7 +26,6 @@ class Game {
         this.num_seeds = document.getElementById("number_seeds").value;
         this.pc_mode = document.getElementById("pc_mode").checked;
         this.first_player = document.querySelector('input[name="chooseplayerRadio"]:checked').value;
-        //console.log(this.first_player);
     }
 }
 
@@ -53,7 +52,6 @@ btnLeave.onclick = function () {
 btnRegister.onclick = function () {
     let response = register();
 
-    //console.log(response)
     if (response) {
         let nickname = document.getElementById("Nickname").value;
 
@@ -69,7 +67,6 @@ btnRegister.onclick = function () {
 
 
 function newGame() {
-    // window.location.reload();
     let rows = document.getElementById("rows");
     let storage0 = document.getElementById("hole00");
     let storage1 = document.getElementById("hole10");

@@ -111,8 +111,6 @@ async function update() {
                 if (game.board.current_player == 0) {
                     let correct_pit = Math.abs(info.pit - game.num_holes);
                     let hole_to_click = game.board.rows_list[0].holes_list[correct_pit];
-                    //console.log("hole clicked by player " + hole_to_click);
-                    //console.log(hole_to_click);
                     reap(hole_to_click);
                     move();
                 }
@@ -126,7 +124,6 @@ async function update() {
                 else {
                     game.board.current_player = 1;
                 }
-                //console.log("changed player");
                 game.board.showMultiPlayer();
             }
         }
@@ -140,7 +137,6 @@ async function update() {
             }
 
             game.board.showMultiPlayerWin(winner);
-            //console.log("recieved winner" + info.winner);
         }
 
     }
@@ -181,7 +177,6 @@ async function notify(to_move) {
     if (!multi_player) {
         return;
     }
-    //console.log("hole number " + to_move);
 
     let options = {
         method: 'POST',
