@@ -8,14 +8,12 @@ async function ranking() {
 
     let request = fetch(url, {
         method: 'POST',
-        body: JSON.stringify({}), //the body of the message is empty, newline
+        body: JSON.stringify({}),
     }
     );
 
-    //if it was ok
     let response = await request;
 
-    //the info that i wanted (in this case the leaderboard)
     let responseJSON = await response.json();
 
     //show what i got 
@@ -104,7 +102,7 @@ async function update() {
                 game.board.showPlayerTurn();
                 first_play = false;
                 multi_player = true;
-                console.log("made first player change")
+                //console.log("made first player change")
             }
         }
 
@@ -113,8 +111,8 @@ async function update() {
                 if (game.board.current_player == 0) {
                     let correct_pit = Math.abs(info.pit - game.num_holes);
                     let hole_to_click = game.board.rows_list[0].holes_list[correct_pit];
-                    console.log("hole clicked by player " + hole_to_click);
-                    console.log(hole_to_click);
+                    //console.log("hole clicked by player " + hole_to_click);
+                    //console.log(hole_to_click);
                     reap(hole_to_click);
                     move();
                 }
@@ -128,7 +126,7 @@ async function update() {
                 else {
                     game.board.current_player = 1;
                 }
-                console.log("changed player");
+                //console.log("changed player");
                 game.board.showMultiPlayer();
             }
         }
@@ -142,7 +140,7 @@ async function update() {
             }
 
             game.board.showMultiPlayerWin(winner);
-            console.log("recieved winner" + info.winner);
+            //console.log("recieved winner" + info.winner);
         }
 
     }
@@ -164,7 +162,6 @@ async function leave() {
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008/leave', options)
         .then((response) => {
             if (response.ok) {
-                console.log("leaved");
                 console.log(response.json());
                 return response;
             } else {
@@ -181,7 +178,10 @@ async function notify(to_move) {
     let nickname = document.getElementById("Nickname").value;
     let psw = document.getElementById("psw").value;
     let gameToken = game.token;
-    console.log("hole number " + to_move);
+    if (!multi_player) {
+        return;
+    }
+    //console.log("hole number " + to_move);
 
     let options = {
         method: 'POST',
@@ -194,7 +194,6 @@ async function notify(to_move) {
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008/notify', options)
         .then((response) => {
             if (response.ok) {
-                console.log(response.json());
                 return response;
             } else {
                 throw new Error('notify error');

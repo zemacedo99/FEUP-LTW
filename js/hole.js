@@ -11,7 +11,7 @@ class Hole {
         this.reaping = false;
         this.harvested_seeds = 0;
         document.getElementById(this.id).onclick = function () {
-            console.log("on the click");
+            //console.log("on the click");
             let right_player = checkPlayer(thisHole);
             if (right_player) {
                 notify(thisHole.hole);
@@ -61,6 +61,6 @@ function reap(hole) {
         hole.harvested_seeds = hole.num_seeds
         hole.reaping = true;
         hole.emptyHole();
-        console.log("reaping in hole");
+        //console.log("reaping in hole");
     }
 }

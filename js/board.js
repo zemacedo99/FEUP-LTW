@@ -121,8 +121,8 @@ class Board {
 
             ai_choice = aiPlay(this.ai_level, this.rows_list[this.pc_player]);
             let hole_to_click = this.rows_list[this.pc_player].holes_list[ai_choice];
-            console.log("hole clicked by pc ");
-            console.log(hole_to_click);
+            //console.log("hole clicked by pc ");
+            //console.log(hole_to_click);
             reap(hole_to_click);
             this.move();
         }
@@ -163,7 +163,6 @@ class Board {
             hole.reaping = false;
             this.aiplay();
         }
-        // console.log( hole.harvested_seeds)
         hole.reaping = false;
     }
 
