@@ -25,23 +25,6 @@ async function ranking() {
 }
 
 
-function showLeaderBoard(rankings) {
-    let tbodyRef = document.getElementById('leaderBoard').getElementsByTagName('tbody')[0];
-    let newRow = tbodyRef.insertRow();
-
-    // console.log(rankings)
-    for (i = 0; i < rankings.length; i++) {
-        let nick = newRow.insertCell(0);
-        let games = newRow.insertCell(1);
-        let victories = newRow.insertCell(2);
-        nick.innerHTML = rankings[i].nick;
-        games.innerHTML = rankings[i].games;
-        victories.innerHTML = rankings[i].victories;
-        newRow = tbodyRef.insertRow();
-    }
-}
-
-
 async function register() {
     let nickname = document.getElementById("Nickname").value;
     let psw = document.getElementById("psw").value;
@@ -108,31 +91,6 @@ async function update() {
         console.log(response.data);
         let info = JSON.parse(response.data);
 
-        /*
-        if ('pit' in info) {
-            if (game.board.current_player == 0 && info.board.turn == nickname) {
-                let hole_to_click = game.board.rows_list[0].holes_list[info.pit];
-                console.log("hole clicked by player " + hole_to_click);
-                console.log(hole_to_click);
-                reap(hole_to_click);
-                move();
-            }
-        }
-
-
-        if ('turn' in info.board && info.pit == undefined) {
-            if (info.board.turn == nickname) {
-                game.board.current_player = 1;
-                console.log(game.board.current_player);
-            }
-            else {
-                game.board.current_player = 0;
-                console.log(game.board.current_player);
-            }
-
-            game.board.showPlayerTurn();
-        }
-        */
 
         if (first_play) {
             if ('turn' in info.board) {
